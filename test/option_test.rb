@@ -1,24 +1,17 @@
-require "test/unit"
+require File.expand_path(File.join(File.dirname(__FILE__), 'test_helper'))
 
 class OptionTest < Test::Unit::TestCase
+  include Rumonade
 
-  # Called before every test method runs. Can be used
-  # to set up fixture information.
-  def setup
-    # Do nothing
+  def test_when_option_with_nil_returns_none_singleton
+    assert_same None, Option(nil)
+    assert_same NoneClass.instance, None
   end
 
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
+  def test_when_option_with_value_returns_some
+    assert_equal Some.new(42), Some(42)
+    assert_equal Some(42), Option(42)
+    assert_not_equal None, Some(nil)
   end
 
-  # Fake test
-  def test_fail
-
-    # To change this template use File | Settings | File Templates.
-    fail("Not implemented")
-  end
 end
