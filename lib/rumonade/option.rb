@@ -2,6 +2,18 @@ require 'singleton'
 
 module Rumonade
   module Option
+    def self.unit(value)
+      Rumonade.Option(value)
+    end
+
+    def bind(lam = nil, &blk)
+      f = lam || blk
+      empty? ? self : f[value]
+    end
+
+    def self.included(mod)
+      mod.send(:define_method, :unit) { |value| Rumonade::Option.unit(value) }
+    end
   end
 
   class Some
@@ -12,6 +24,10 @@ module Rumonade
     end
 
     attr_reader :value
+
+    def self.unit(value)
+      Option.unit(value)
+    end
 
     def empty?
       false
@@ -44,4 +60,7 @@ module Rumonade
   end
 
   None = NoneClass.instance
+
+  module_function :Option, :Some
+  public :Option, :Some
 end
