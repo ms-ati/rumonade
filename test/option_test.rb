@@ -37,4 +37,11 @@ class OptionTest < Test::Unit::TestCase
     assert_raise(NoSuchElementError) { None.get }
   end
 
+  def test_when_get_or_else_on_some_returns_value_but_on_none_returns_value_or_executes_block_or_lambda
+    assert_equal "foo", Some("foo").get_or_else("bar")
+    assert_equal "bar", None.get_or_else("bar")
+    assert_equal "blk", None.get_or_else { "blk" }
+    assert_equal "lam", None.get_or_else(lambda { "lam"} )
+  end
+
 end

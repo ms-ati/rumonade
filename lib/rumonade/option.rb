@@ -16,8 +16,12 @@ module Rumonade
     end
 
     def get
-      if empty? then raise NoSuchElementError end
-      value
+      if !empty? then value else raise NoSuchElementError end
+    end
+
+    def get_or_else(val_or_lam = nil, &blk)
+      v_or_f = val_or_lam || blk
+      if !empty? then value else (v_or_f.respond_to?(:call) ? v_or_f.call : v_or_f) end
     end
   end
 
