@@ -6,13 +6,18 @@ module Rumonade
       Rumonade.Option(value)
     end
 
+    def self.included(mod)
+      mod.send(:define_method, :unit) { |value| Rumonade::Option.unit(value) }
+    end
+
     def bind(lam = nil, &blk)
       f = lam || blk
       empty? ? self : f[value]
     end
 
-    def self.included(mod)
-      mod.send(:define_method, :unit) { |value| Rumonade::Option.unit(value) }
+    def get
+      if empty? then raise NoSuchElementError end
+      value
     end
   end
 
@@ -50,6 +55,8 @@ module Rumonade
       other.equal?(self.class.instance)
     end
   end
+
+  class NoSuchElementError < RuntimeError; end
 
   def Option(value)
     value.nil? ? None : Some(value)

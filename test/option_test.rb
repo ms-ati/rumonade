@@ -27,4 +27,14 @@ class OptionTest < Test::Unit::TestCase
     end
   end
 
+  def test_when_value_on_some_returns_value_but_on_none_raises
+    assert_equal "foo", Some("foo").value
+    assert_raise(NoMethodError) { None.value }
+  end
+
+  def test_when_get_on_some_returns_value_but_on_none_raises
+    assert_equal "foo", Some("foo").get
+    assert_raise(NoSuchElementError) { None.get }
+  end
+
 end
