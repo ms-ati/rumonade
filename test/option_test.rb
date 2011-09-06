@@ -44,4 +44,14 @@ class OptionTest < Test::Unit::TestCase
     assert_equal "lam", None.get_or_else(lambda { "lam"} )
   end
 
+  def test_flat_map_behaves_correctly
+    assert_equal Some("FOO"), Some("foo").flat_map { |s| Some(s.upcase) }
+    assert_equal None, None.flat_map { |s| Some(s.upcase) }
+  end
+
+  def test_map_behaves_correctly
+    assert_equal "FOO", Some("foo").map { |s| s.upcase }
+    assert_equal None, None.map { |s| s.upcase }
+  end
+
 end

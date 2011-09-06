@@ -2,6 +2,8 @@ require 'singleton'
 
 module Rumonade
   module Option
+    include Monad
+
     def self.unit(value)
       Rumonade.Option(value)
     end
