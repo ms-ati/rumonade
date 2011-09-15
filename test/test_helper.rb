@@ -1,4 +1,5 @@
-$:.unshift(File.dirname(__FILE__) + "../../lib")
+$:.unshift(File.dirname(File.dirname(File.expand_path(__FILE__))) + '/lib')
+require "rubygems"
 require "test/unit"
 require "rumonade"
 

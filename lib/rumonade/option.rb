@@ -1,4 +1,5 @@
 require 'singleton'
+require 'rumonade/monad'
 
 module Rumonade
   module Option
@@ -25,6 +26,10 @@ module Rumonade
       v_or_f = val_or_lam || blk
       if !empty? then value else (v_or_f.respond_to?(:call) ? v_or_f.call : v_or_f) end
     end
+
+    def or_nil
+      get rescue nil
+    end
   end
 
   class Some
@@ -45,7 +50,7 @@ module Rumonade
     end
 
     def ==(other)
-      other.is_a?(Some) && other.value.eql?(value)
+      other.is_a?(Some) && other.value == value
     end
   end
 

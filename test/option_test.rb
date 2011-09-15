@@ -1,4 +1,4 @@
-require File.expand_path(File.join(File.dirname(__FILE__), 'test_helper'))
+require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
 class OptionTest < Test::Unit::TestCase
   include Rumonade
@@ -44,6 +44,11 @@ class OptionTest < Test::Unit::TestCase
     assert_equal "lam", None.get_or_else(lambda { "lam"} )
   end
 
+  def test_when_or_nil_on_some_returns_value_but_on_none_returns_nil
+    assert_equal 123, Some(123).or_nil
+    assert_nil None.or_nil
+  end
+
   def test_flat_map_behaves_correctly
     assert_equal Some("FOO"), Some("foo").flat_map { |s| Some(s.upcase) }
     assert_equal None, None.flat_map { |s| Some(s.upcase) }
@@ -52,6 +57,18 @@ class OptionTest < Test::Unit::TestCase
   def test_map_behaves_correctly
     assert_equal "FOO", Some("foo").map { |s| s.upcase }
     assert_equal None, None.map { |s| s.upcase }
+  end
+
+  def test_shallow_flatten_behaves_correctly
+    assert_equal Some(Some(1)), Some(Some(Some(1))).shallow_flatten
+    assert_equal None, Some(None).shallow_flatten
+    assert_equal Some(1), Some(1).shallow_flatten
+  end
+
+  def test_flatten_behaves_correctly
+    assert_equal Some(1), Some(Some(Some(1))).flatten
+    assert_equal None, Some(None).flatten
+    assert_equal Some(1), Some(1).flatten
   end
 
 end
