@@ -27,6 +27,10 @@ class OptionTest < Test::Unit::TestCase
     end
   end
 
+  def test_when_empty_returns_none
+    assert_equal None, Option.empty
+  end
+
   def test_when_value_on_some_returns_value_but_on_none_raises
     assert_equal "foo", Some("foo").value
     assert_raise(NoMethodError) { None.value }

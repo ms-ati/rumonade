@@ -9,6 +9,10 @@ module Rumonade
       Rumonade.Option(value)
     end
 
+    def self.empty
+      None
+    end
+
     def self.included(mod)
       mod.send(:define_method, :unit) { |value| Rumonade::Option.unit(value) }
     end
