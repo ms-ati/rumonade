@@ -56,6 +56,10 @@ module Rumonade
     def ==(other)
       other.is_a?(Some) && other.value == value
     end
+
+    def to_s
+      "Some(#{value.to_s})"
+    end
   end
 
   class NoneClass
@@ -68,6 +72,10 @@ module Rumonade
 
     def ==(other)
       other.equal?(self.class.instance)
+    end
+
+    def to_s
+      "None"
     end
   end
 

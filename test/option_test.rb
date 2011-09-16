@@ -75,4 +75,9 @@ class OptionTest < Test::Unit::TestCase
     assert_equal Some(1), Some(1).flatten
   end
 
+  def test_to_s_behaves_correctly
+    assert_equal "Some(1)", Some(1).to_s
+    assert_equal "None", None.to_s
+    assert_equal "Some(Some(None))", Some(Some(None)).to_s
+  end
 end
