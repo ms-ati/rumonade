@@ -10,6 +10,10 @@ module Rumonade
       bind { |v| (lam || blk).call(v) }
     end
 
+    def each(lam = nil, &blk)
+      map(lam || blk); nil
+    end
+
     def shallow_flatten
       bind { |x| x.is_a?(Monad) ? x : self.class.unit(x) }
     end

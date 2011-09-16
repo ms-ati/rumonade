@@ -84,4 +84,9 @@ class OptionTest < Test::Unit::TestCase
     assert_equal "None", None.to_s
     assert_equal "Some(Some(None))", Some(Some(None)).to_s
   end
+
+  def test_each_behaves_correctly
+    vals = [None, Some(42)].inject([]) { |arr, opt| assert_nil(opt.each { |val| arr << val }); arr }
+    assert_equal [42], vals
+  end
 end
