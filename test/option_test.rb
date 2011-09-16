@@ -17,6 +17,10 @@ class OptionTest < Test::Unit::TestCase
     assert_not_equal None, Some(nil)
   end
 
+  def test_when_option_constructor_raises
+    assert_raise(TypeError) { Option.new }
+  end
+
   def test_monad_axioms
     f = lambda { |x| Option(x && x * 2) }
     g = lambda { |x| Option(x && x * 5) }

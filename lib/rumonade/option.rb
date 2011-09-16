@@ -2,25 +2,31 @@ require 'singleton'
 require 'rumonade/monad'
 
 module Rumonade
-  module Option
-    def self.unit(value)
-      Rumonade.Option(value)
+  class Option
+    class << self
+      def unit(value)
+        Rumonade.Option(value)
+      end
+
+      def empty
+        None
+      end
     end
 
-    def self.empty
-      None
-    end
-
-    def self.included(mod)
-      mod.send(:define_method, :unit) { |value| Rumonade::Option.unit(value) }
+    def initialize
+      raise(TypeError, "class Option is abstract; cannot be instantiated") if self.class == Option
     end
 
     def bind(lam = nil, &blk)
       f = lam || blk
-      empty? ? self : f[value]
+      empty? ? self : f.call(value)
     end
 
     include Monad
+
+    def empty?
+      raise(NotImplementedError)
+    end
 
     def get
       if !empty? then value else raise NoSuchElementError end
@@ -32,22 +38,16 @@ module Rumonade
     end
 
     def or_nil
-      get rescue nil
+      get_or_else(nil)
     end
   end
 
-  class Some
-    include Option
-
+  class Some < Option
     def initialize(value)
       @value = value
     end
 
     attr_reader :value
-
-    def self.unit(value)
-      Option.unit(value)
-    end
 
     def empty?
       false
@@ -62,8 +62,7 @@ module Rumonade
     end
   end
 
-  class NoneClass
-    include Option
+  class NoneClass < Option
     include Singleton
 
     def empty?
