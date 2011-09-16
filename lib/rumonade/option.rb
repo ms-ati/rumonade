@@ -3,8 +3,6 @@ require 'rumonade/monad'
 
 module Rumonade
   module Option
-    include Monad
-
     def self.unit(value)
       Rumonade.Option(value)
     end
@@ -21,6 +19,8 @@ module Rumonade
       f = lam || blk
       empty? ? self : f[value]
     end
+
+    include Monad
 
     def get
       if !empty? then value else raise NoSuchElementError end

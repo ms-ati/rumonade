@@ -1,27 +1,27 @@
 require 'rumonade/monad'
 
 module Rumonade
-  module ArrayMonadClassMethods
-    def unit(value)
-      [value]
+  module ArrayExtensions
+    module ClassMethods
+      def unit(value)
+        [value]
+      end
+
+      def empty
+        []
+      end
     end
 
-    def empty
-      []
-    end
-  end
+    module InstanceMethods
+      def bind(lam = nil, &blk)
+        f = lam || blk
+        inject([]) { |arr, elt| arr + f.call(elt) }
+      end
 
-  module ArrayMonadInstanceMethods
-    include Monad
-
-    def bind(lam = nil, &blk)
-      f = lam || blk
-      inject([]) { |arr, elt| arr + f.call(elt) }
+      include Monad
     end
   end
 end
 
-class Array
-  extend Rumonade::ArrayMonadClassMethods
-  include Rumonade::ArrayMonadInstanceMethods
-end
+Array.send(:extend, Rumonade::ArrayExtensions::ClassMethods)
+Array.send(:include, Rumonade::ArrayExtensions::InstanceMethods)

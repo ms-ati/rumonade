@@ -1,7 +1,9 @@
 module Rumonade
   module Monad
-    def flat_map(lam = nil, &blk)
-      bind(lam || blk)
+    def self.included(base)
+      base.class_eval do
+        alias_method :flat_map, :bind
+      end
     end
 
     def map(lam = nil, &blk)
