@@ -89,4 +89,15 @@ class OptionTest < Test::Unit::TestCase
     vals = [None, Some(42)].inject([]) { |arr, opt| assert_nil(opt.each { |val| arr << val }); arr }
     assert_equal [42], vals
   end
+
+  def test_enumerable_methods_are_available
+    assert Some(1).all? { |v| v < 10 }
+    assert !Some(1).all? { |v| v > 10 }
+    assert None.all? { |v| v > 10 }
+  end
+
+  def test_to_a_behaves_correctly
+    assert_equal [1], Some(1).to_a
+    assert_equal [], None.to_a
+  end
 end

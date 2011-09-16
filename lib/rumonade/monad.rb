@@ -6,6 +6,8 @@ module Rumonade
       end
     end
 
+    include Enumerable
+
     def map(lam = nil, &blk)
       bind { |v| (lam || blk).call(v) }
     end
