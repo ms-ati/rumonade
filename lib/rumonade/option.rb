@@ -1,7 +1,8 @@
 require 'singleton'
 require 'rumonade/monad'
 
-module Rumonade
+module Rumonade # :nodoc:
+  # TODO: Document this
   class Option
     class << self
       def unit(value)
@@ -42,6 +43,7 @@ module Rumonade
     end
   end
 
+  # TODO: Document this
   class Some < Option
     def initialize(value)
       @value = value
@@ -62,6 +64,7 @@ module Rumonade
     end
   end
 
+  # TODO: Document this
   class NoneClass < Option
     include Singleton
 
@@ -78,16 +81,20 @@ module Rumonade
     end
   end
 
+  # TODO: Document this
   class NoSuchElementError < RuntimeError; end
 
+  # TODO: Document this
   def Option(value)
     value.nil? ? None : Some(value)
   end
 
+  # TODO: Document this
   def Some(value)
     Some.new(value)
   end
 
+  # TODO: Document this
   None = NoneClass.instance
 
   module_function :Option, :Some

@@ -1,0 +1,15 @@
+= Rumonade
+=== A Ruby Monad Library, Inspired by Scala
+
+Are you working in both the Scala and Ruby worlds, and finding that you miss some of the practical benefits
+of Scala's monads in Ruby? Then Rumonade is for you.
+
+The goal of this library is to make the most common scala monad idioms available in ruby:
+* Option
+* Arrays of Options / Options of Arrays
+* Either
+* for comprehensions
+
+This code is in a very early state, but the Option monad is already present.
+Please try it out and let me know what you think.
+

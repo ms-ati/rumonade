@@ -1,4 +1,5 @@
 module Rumonade
+  # TODO: Document this
   module Monad
     METHODS_TO_REPLACE = [:flat_map, :flatten]
 

@@ -1,0 +1,7 @@
+=== 0.1.0 / 2011-09-17
+
+* Initial Feature Set
+
+  * general implementation and testing of monadic laws based on `unit` and `bind`
+  * scala-like Option class w/ Some & None
+  * scala-like extensions to Array

@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Rumonade::VERSION
   s.authors     = ["Marc Siegel"]
   s.email       = ["msiegel@usainnov.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "http://github.com/ms-ati/rumonade"
+  s.summary     = "A Scala-inspired Monad library for Ruby"
+  s.description = "A Scala-inspired Monad library for Ruby, aiming to share the most common idioms for folks working in both languages. Includes Option, Array, etc."
 
   s.rubyforge_project = "rumonade"
 
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  s.add_development_dependency "test-unit"
-  s.add_development_dependency "rdoc"
-  s.add_development_dependency "rr"
+  #s.add_development_dependency "rdoc"
+  #s.add_development_dependency "test-unit"
+  #s.add_development_dependency "rr"
 end
