@@ -71,12 +71,14 @@ class OptionTest < Test::Unit::TestCase
     assert_equal Some(Some(1)), Some(Some(Some(1))).shallow_flatten
     assert_equal None, Some(None).shallow_flatten
     assert_equal Some(1), Some(1).shallow_flatten
+    assert_equal [None, Some(1)], Some([None, Some(1)]).shallow_flatten
   end
 
   def test_flatten_behaves_correctly
     assert_equal Some(1), Some(Some(Some(1))).flatten
     assert_equal None, Some(None).flatten
     assert_equal Some(1), Some(1).flatten
+    assert_equal [1], Some([None, Some(1)]).flatten
   end
 
   def test_to_s_behaves_correctly

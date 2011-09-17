@@ -31,10 +31,15 @@ class ArrayTest < Test::Unit::TestCase
   end
 
   def test_shallow_flatten_behaves_correctly
-    assert_equal [0, 1, [2], [[3]]], [0, [1], [[2]], [[[3]]]].shallow_flatten
+    assert_equal [0, 1, [2], [[3]], [[[4]]]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].shallow_flatten
+    assert_equal [1], [None, Some(1)].shallow_flatten
+    assert_equal [1, Some(2)], [None, Some(1), Some(Some(2))].shallow_flatten
+    assert_equal [Some(Some(None))], [Some(Some(Some(None)))].shallow_flatten
   end
 
   def test_flatten_behaves_correctly
-    assert_equal [0, 1, 2, 3], [0, [1], [[2]], [[[3]]]].flatten
+    assert_equal [0, 1, 2, 3, 4], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten
+    assert_equal [1, 2], [None, Some(1), Some(Some(2))].flatten
+    assert_equal [], [Some(Some(Some(None)))].flatten
   end
 end
