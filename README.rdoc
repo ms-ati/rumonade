@@ -1,15 +1,67 @@
-= Rumonade
-=== A Ruby Monad Library, Inspired by Scala
+= Rumonade[https://rubygems.org/gems/rumonade]
 
-Are you working in both the Scala and Ruby worlds, and finding that you miss some of the practical benefits
-of Scala's monads in Ruby? Then Rumonade is for you.
+== A Ruby[http://www.ruby-lang.org] Monad[http://en.wikipedia.org/wiki/Monad_(functional_programming)] Library, Inspired by Scala[http://www.scala-lang.org]
 
-The goal of this library is to make the most common scala monad idioms available in ruby:
-* Option
-* Arrays of Options / Options of Arrays
+Are you working in both the Scala[http://www.scala-lang.org] and Ruby[http://www.ruby-lang.org] worlds,
+and finding that you miss some of the practical benefits of Scala's
+monads[http://james-iry.blogspot.com/2007/09/monads-are-elephants-part-1.html] in Ruby?
+Then Rumonade is for you.
+
+The goal of this library is to make the most common and useful Scala monadic idioms available in Ruby via the following classes:
+* Rumonade::Option
+* Array
 * Either
-* for comprehensions
+* Hash
+* (more TBD)
+
+Syntactic support for scala-like for-comprehensions[http://www.scala-lang.org/node/111] will be implemented
+as a sequence of calls to #flat_map, #select, etc, modelling Scala's
+approach[http://stackoverflow.com/questions/3754089/scala-for-comprehension/3754568#3754568].
+
+Support for an all_catch[http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/library/scala/util/control/Exception$.html]
+idiom will be implemented to turn blocks which might throw exceptions into Option or Either
+results. If this proves useful (and a good fit for Ruby), then more narrow functional catchers can be implemented as well.
+
+== Usage
+
+You can transform possibly nil values in a functional fashion, which many find more clear and elegant:
+
+  require 'date'
+  require 'time'
+  require 'rumonade'
+
+  def format_date_in_march(time_or_date_or_nil)
+    Option(time_or_date_or_nil).
+        map(&:to_date).select {|d| d.month == 3}.
+        map(&:to_s).map {|s| s.gsub('-', '')}.get_or_else("not in march!")
+  end
+
+  format_date_in_march(nil)                            # => "not in march!"
+  format_date_in_march(Time.parse('2011-01-01 12:34')) # => "not in march!"
+  format_date_in_march(Time.parse('2011-03-21 12:34')) # => "20110321"
+
+(more examples coming soon...)
+
+== Approach
+
+There have been many[http://moonbase.rydia.net/mental/writings/programming/monads-in-ruby/00introduction.html]
+posts[http://pretheory.wordpress.com/2008/02/14/the-maybe-monad-in-ruby/]
+and[http://www.valuedlessons.com/2008/01/monads-in-ruby-with-nice-syntax.html]
+discussions[http://stackoverflow.com/questions/2709361/monad-equivalent-in-ruby]
+about monads in Ruby, which have sparked a number of approaches.
+
+Rumonade wants to be a practical drop-in Monad solution that will fit well into the Ruby world.
+
+The priorities for Rumonade are:
+1. Practical usability in day-to-day Ruby
+   * <b>don't</b> mess up normal idioms of the language (e.g., Array#map)
+   * <b>don't</b> slow down normal idioms of the language (e.g., Array#map)
+2. Rubyish-ness of usage
+   * Monad is a mix-in, requiring methods self.unit and #bind be implemented by target classes
+   * Prefer blocks to lambda/Procs where possible
+3. Equivalent idioms to Scala where possible
+
+== Status
 
 This code is in a very early state, but the Option monad is already present.
-Please try it out and let me know what you think.
-
+Please try it out, and let me know what you think!

@@ -1,5 +1,5 @@
 # Adapted from http://stackoverflow.com/questions/2709361/monad-equivalent-in-ruby
-class LazyIdentity
+class LazyIdentity # :nodoc:
   def initialize(lam = nil, &blk)
     @lazy = lam || blk
     @lazy.is_a?(Proc) || raise(ArgumentError, "not a Proc")

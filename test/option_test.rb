@@ -63,7 +63,7 @@ class OptionTest < Test::Unit::TestCase
   end
 
   def test_map_behaves_correctly
-    assert_equal "FOO", Some("foo").map { |s| s.upcase }
+    assert_equal Some("FOO"), Some("foo").map { |s| s.upcase }
     assert_equal None, None.map { |s| s.upcase }
   end
 
@@ -101,5 +101,11 @@ class OptionTest < Test::Unit::TestCase
   def test_to_a_behaves_correctly
     assert_equal [1], Some(1).to_a
     assert_equal [], None.to_a
+  end
+
+  def test_select_behaves_correctly
+    assert_equal Some(1), Some(1).select { |n| n > 0 }
+    assert_equal None, Some(1).select { |n| n < 0 }
+    assert_equal None, None.select { |n| n < 0 }
   end
 end
