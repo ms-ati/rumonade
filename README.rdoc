@@ -40,8 +40,12 @@ Using Option, one can transform _possibly_nil_ values in a _functional_ fashion,
   end
 
   format_date_in_march(nil)                            # => "not in march!"
-  format_date_in_march(Time.parse('2011-01-01 12:34')) # => "not in march!"
+  format_date_in_march(Time.parse('2009-01-01 01:02')) # => "not in march!"
   format_date_in_march(Time.parse('2011-03-21 12:34')) # => "20110321"
+
+Note:
+* each step of the chained computations are functionally isolated
+* the value can notionally _start_ as `nil`, or become `nil` at the select steps
 
 (more examples coming soon...)
 
