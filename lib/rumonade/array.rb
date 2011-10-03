@@ -1,6 +1,7 @@
 require 'rumonade/monad'
 
 module Rumonade
+  # TODO: Document use of Array as a Monad
   module ArrayExtensions
     module ClassMethods
       def unit(value)
@@ -14,8 +15,7 @@ module Rumonade
 
     module InstanceMethods
       def bind(lam = nil, &blk)
-        f = lam || blk
-        inject([]) { |arr, elt| arr + f.call(elt).to_a }
+        inject(self.class.empty) { |arr, elt| arr + (lam || blk).call(elt).to_a }
       end
     end
   end
