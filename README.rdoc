@@ -8,10 +8,10 @@ monads[http://james-iry.blogspot.com/2007/09/monads-are-elephants-part-1.html] i
 Then Rumonade is for you.
 
 The goal of this library is to make the most common and useful Scala monadic idioms available in Ruby via the following classes:
-* Rumonade::Option
+* Option
 * Array
-* Either
-* Hash
+* Either -- _coming_soon!_
+* Hash -- _coming_soon!_
 * (more TBD)
 
 Syntactic support for scala-like for-comprehensions[http://www.scala-lang.org/node/111] will be implemented
@@ -24,16 +24,19 @@ results. If this proves useful (and a good fit for Ruby), then more narrow funct
 
 == Usage
 
-You can transform possibly nil values in a functional fashion, which many find more clear and elegant:
+Using Option, one can transform _possibly_nil_ values in a _functional_ fashion, which can increase clarity and robustness:
 
   require 'date'
   require 'time'
   require 'rumonade'
 
   def format_date_in_march(time_or_date_or_nil)
-    Option(time_or_date_or_nil).
-        map(&:to_date).select {|d| d.month == 3}.
-        map(&:to_s).map {|s| s.gsub('-', '')}.get_or_else("not in march!")
+    Option(time_or_date_or_nil).      # wraps possibly-nil value in an Option monad (Some or None)
+        map(&:to_date).               # transforms a contained Time value into a Date value
+        select {|d| d.month == 3}.    # filters out non-matching Date values (Some becomes None)
+        map(&:to_s).                  # transforms a contained Date value into a String value
+        map {|s| s.gsub('-', '')}.    # transforms a contained String value by removing '-'
+        get_or_else("not in march!")  # returns the contained value, or the alternative if None
   end
 
   format_date_in_march(nil)                            # => "not in march!"
@@ -54,7 +57,7 @@ Rumonade wants to be a practical drop-in Monad solution that will fit well into 
 
 The priorities for Rumonade are:
 1. Practical usability in day-to-day Ruby
-   * <b>don't</b> mess up normal idioms of the language (e.g., Array#map)
+   * <b>don't</b> mess up normal idioms of the language (e.g., Hash#map)
    * <b>don't</b> slow down normal idioms of the language (e.g., Array#map)
 2. Rubyish-ness of usage
    * Monad is a mix-in, requiring methods self.unit and #bind be implemented by target classes
