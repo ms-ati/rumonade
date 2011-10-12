@@ -25,6 +25,7 @@ require "rumonade/monad"
 require "rumonade/lazy_identity"
 require "rumonade/option"
 require "rumonade/array"
+require "rumonade/either"
 
 # = Rumonade
 #
