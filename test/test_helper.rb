@@ -1,7 +1,6 @@
 $:.unshift(File.dirname(File.dirname(File.expand_path(__FILE__))) + '/lib')
 require "rubygems"
 require "test/unit"
-require "rr"
 require "rumonade"
 
 # see http://stackoverflow.com/questions/2709361/monad-equivalent-in-ruby
