@@ -33,14 +33,21 @@ class EitherTest < Test::Unit::TestCase
   end
 
   def test_projections_for_left_and_right
-    assert_equal LeftProjection.new(Left("error")), Left("error").left
-    assert_equal RightProjection.new(Left("error")), Left("error").right
-    assert_equal LeftProjection.new(Right(42)), Right(42).left
-    assert_equal RightProjection.new(Right(42)), Right(42).right
+    assert_equal Either::LeftProjection.new(Left("error")), Left("error").left
+    assert_equal Either::RightProjection.new(Left("error")), Left("error").right
+    assert_equal Either::LeftProjection.new(Right(42)), Right(42).left
+    assert_equal Either::RightProjection.new(Right(42)), Right(42).right
 
-    assert_not_equal LeftProjection.new(Left("error")), Left("error").right
-    assert_not_equal RightProjection.new(Left("error")), Left("error").left
-    assert_not_equal LeftProjection.new(Right(42)), Right(42).right
-    assert_not_equal RightProjection.new(Right(42)), Right(42).left
+    assert_not_equal Either::LeftProjection.new(Left("error")), Left("error").right
+    assert_not_equal Either::RightProjection.new(Left("error")), Left("error").left
+    assert_not_equal Either::LeftProjection.new(Right(42)), Right(42).right
+    assert_not_equal Either::RightProjection.new(Right(42)), Right(42).left
+  end
+
+  def test_flat_map_for_left_and_right_projections_returns_eithers
+    assert_equal Left("42"), Right(42).right.flat_map { |n| Left(n.to_s) }
+    assert_equal Right(42), Right(42).left.flat_map { |n| Left(n.to_s) }
+    assert_equal Right("ERROR"), Left("error").left.flat_map { |n| Right(n.upcase) }
+    assert_equal Left("error"), Left("error").right.flat_map { |n| Right(n.upcase) }
   end
 end

@@ -90,32 +90,45 @@ module Rumonade # :nodoc:
     Right.new(right_value)
   end
 
-  # @private
-  class EitherProjection
-    # @param either_value [Object] the Either value to project
-    def initialize(either_value)
-      either_value = either_value
+  class Either
+    # Projects an Either into a Left.
+    class LeftProjection
+      # @param either_value [Object] the Either value to project
+      def initialize(either_value)
+        @either_value = either_value
+      end
+
+      # @return Returns the Either value
+      attr_reader :either_value
+
+      def ==(other)
+        other.is_a?(LeftProjection) && other.either_value == self.either_value
+      end
+
+      def bind(lam = nil, &blk)
+        !either_value.left? ? either_value : (lam || blk).call(either_value.left_value)
+      end
+      alias_method :flat_map, :bind
     end
 
-    # @return Returns the Either value
-    attr_reader :either_value
+    # Projects an Either into a Right.
+    class RightProjection
+      # @param either_value [Object] the Either value to project
+      def initialize(either_value)
+        @either_value = either_value
+      end
 
-    def ==(other)
-      other.is_a?(EitherProjection) && other.either_value == self.either_value
-    end
-  end
+      # @return Returns the Either value
+      attr_reader :either_value
 
-  # Projects an Either into a Left.
-  class LeftProjection < EitherProjection
-    def ==(other)
-      other.is_a?(LeftProjection) && super
-    end
-  end
+      def ==(other)
+        other.is_a?(RightProjection) && other.either_value == self.either_value
+      end
 
-  # Projects an Either into a Right.
-  class RightProjection < EitherProjection
-    def ==(other)
-      other.is_a?(RightProjection) && super
+      def bind(lam = nil, &blk)
+        !either_value.right? ? either_value : (lam || blk).call(either_value.right_value)
+      end
+      alias_method :flat_map, :bind
     end
   end
 end
