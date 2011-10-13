@@ -31,4 +31,16 @@ class EitherTest < Test::Unit::TestCase
     assert_equal "errorerror", Left("error").fold(times_two, times_ten)
     assert_equal 420, Right(42).fold(times_two, times_ten)
   end
+
+  def test_projections_for_left_and_right
+    assert_equal LeftProjection.new(Left("error")), Left("error").left
+    assert_equal RightProjection.new(Left("error")), Left("error").right
+    assert_equal LeftProjection.new(Right(42)), Right(42).left
+    assert_equal RightProjection.new(Right(42)), Right(42).right
+
+    assert_not_equal LeftProjection.new(Left("error")), Left("error").right
+    assert_not_equal RightProjection.new(Left("error")), Left("error").left
+    assert_not_equal LeftProjection.new(Right(42)), Right(42).right
+    assert_not_equal RightProjection.new(Right(42)), Right(42).left
+  end
 end

@@ -34,6 +34,16 @@ module Rumonade # :nodoc:
     def fold(function_of_left_value, function_of_right_value)
       if left? then function_of_left_value.call(left_value) else function_of_right_value.call(right_value) end
     end
+
+    # @return [LeftProjection] Projects this Either as a Left.
+    def left
+      LeftProjection.new(self)
+    end
+
+    # @return [RightProjection] Projects this Either as a Right.
+    def right
+      RightProjection.new(self)
+    end
   end
 
   # The left side of the disjoint union, as opposed to the Right side.
@@ -78,5 +88,34 @@ module Rumonade # :nodoc:
   # @return [Right]
   def Right(right_value)
     Right.new(right_value)
+  end
+
+  # @private
+  class EitherProjection
+    # @param either_value [Object] the Either value to project
+    def initialize(either_value)
+      either_value = either_value
+    end
+
+    # @return Returns the Either value
+    attr_reader :either_value
+
+    def ==(other)
+      other.is_a?(EitherProjection) && other.either_value == self.either_value
+    end
+  end
+
+  # Projects an Either into a Left.
+  class LeftProjection < EitherProjection
+    def ==(other)
+      other.is_a?(LeftProjection) && super
+    end
+  end
+
+  # Projects an Either into a Right.
+  class RightProjection < EitherProjection
+    def ==(other)
+      other.is_a?(RightProjection) && super
+    end
   end
 end
