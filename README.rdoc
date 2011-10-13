@@ -12,11 +12,11 @@ monads[http://james-iry.blogspot.com/2007/09/monads-are-elephants-part-1.html] i
 Then Rumonade is for you.
 
 The goal of this library is to make the most common and useful Scala monadic idioms available in Ruby via the following classes:
-* Option
-* Array
-* Either -- _coming_soon!_
-* Hash -- _coming_soon!_
-* (more TBD)
+* {Rumonade::Option Option}
+* {Rumonade::ArrayExtensions Array}
+* {Rumonade::Either Either}
+* Hash -- _coming_ _soon!_
+* (_more_ _TBD_)
 
 Syntactic support for scala-like for-comprehensions[http://www.scala-lang.org/node/111] will be implemented
 as a sequence of calls to #flat_map, #select, etc, modelling Scala's
@@ -28,11 +28,8 @@ results. If this proves useful (and a good fit for Ruby), then more narrow funct
 
 == Usage
 
-Using Option, one can transform _possibly_nil_ values in a _functional_ fashion, which can increase clarity and robustness:
-
-  require 'date'
-  require 'time'
-  require 'rumonade'
+Using Option, one can transform _possibly_ _nil_ values in a _functional_ fashion, which can increase clarity while
+eliminating opportunities for bugs:
 
   def format_date_in_march(time_or_date_or_nil)
     Option(time_or_date_or_nil).      # wraps possibly-nil value in an Option monad (Some or None)
@@ -48,10 +45,10 @@ Using Option, one can transform _possibly_nil_ values in a _functional_ fashion,
   format_date_in_march(Time.parse('2011-03-21 12:34')) # => "20110321"
 
 Note:
-* each step of the chained computations are functionally isolated
-* the value can notionally _start_ as nil, or _become_ nil during a computation, without effecting other chained computations
+* each step of the chained computations above are functionally isolated
+* the value can notionally _start_ as nil, or _become_ nil during a computation, without effecting any other chained computations
 
-(more examples coming soon...)
+(_more_ _examples_ _coming_ _soon_...)
 
 == Approach
 

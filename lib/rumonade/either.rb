@@ -1,7 +1,7 @@
 require 'singleton'
 require 'rumonade/monad'
 
-module Rumonade # :nodoc:
+module Rumonade
   # Represents a value of one of two possible types (a disjoint union).
   # The data constructors {Rumonade::Left} and {Rumonade::Right} represent the two possible values.
   # The +Either+ type is often used as an alternative to {Rumonade::Option} where {Rumonade::Left} represents
