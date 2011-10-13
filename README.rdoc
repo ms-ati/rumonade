@@ -1,7 +1,8 @@
 = Rumonade[https://rubygems.org/gems/rumonade]
 
-Project[http://github.com/ms-ati/rumonade]
-Documentation[http://rubydoc.info/gems/rumonade/file/README.rdoc]
+Project: github[http://github.com/ms-ati/rumonade]
+
+Documentation: rubydoc.info[http://rubydoc.info/gems/rumonade/file/README.rdoc]
 
 == A Ruby[http://www.ruby-lang.org] Monad[http://en.wikipedia.org/wiki/Monad_(functional_programming)] Library, Inspired by Scala[http://www.scala-lang.org]
 
