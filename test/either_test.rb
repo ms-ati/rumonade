@@ -131,4 +131,11 @@ class EitherTest < Test::Unit::TestCase
     assert_equal :other_value, Right(42).left.get_or_else(:other_value)
     assert_equal :value_of_block, Right(42).left.get_or_else(lambda { :value_of_block })
   end
+
+  def test_to_opt_for_left_and_right_projections_returns_Some_if_correct_type_or_None
+    assert_equal Some("error"), Left("error").left.to_opt
+    assert_equal None, Left("error").right.to_opt
+    assert_equal Some(42), Right(42).right.to_opt
+    assert_equal None, Right(42).left.to_opt
+  end
 end

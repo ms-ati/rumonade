@@ -150,6 +150,11 @@ module Rumonade
         v_or_f = val_or_lam || blk
         if either_value.left? then either_value.left_value else (v_or_f.respond_to?(:call) ? v_or_f.call : v_or_f) end
       end
+
+      # @return [Option] Returns a +Some+ containing the +Left+ value if it exists or a +None+ if this is a +Right+.
+      def to_opt
+        Option(get_or_else(nil))
+      end
     end
 
     # Projects an Either into a Right.
@@ -210,6 +215,11 @@ module Rumonade
       def get_or_else(val_or_lam = nil, &blk)
         v_or_f = val_or_lam || blk
         if either_value.right? then either_value.right_value else (v_or_f.respond_to?(:call) ? v_or_f.call : v_or_f) end
+      end
+
+      # @return [Option] Returns a +Some+ containing the +Right+ value if it exists or a +None+ if this is a +Left+.
+      def to_opt
+        Option(get_or_else(nil))
       end
     end
   end
