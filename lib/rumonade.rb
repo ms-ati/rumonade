@@ -21,6 +21,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 require "rumonade/version"
+require "rumonade/errors"
 require "rumonade/monad"
 require "rumonade/lazy_identity"
 require "rumonade/option"

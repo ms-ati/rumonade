@@ -139,6 +139,11 @@ module Rumonade
       def all?(lam = nil, &blk)
         !either_value.left? || bind(lam || blk)
       end
+
+      # Returns the value from this +Left+ or raises +NoSuchElementException+ if this is a +Right+.
+      def get
+        if either_value.left? then either_value.left_value else raise NoSuchElementError end
+      end
     end
 
     # Projects an Either into a Right.
@@ -188,6 +193,11 @@ module Rumonade
       # @return [Boolean] Returns +true+ if +Left+ or returns the result of the application of the given function to the +Right+ value.
       def all?(lam = nil, &blk)
         !either_value.right? || bind(lam || blk)
+      end
+
+      # Returns the value from this +Right+ or raises +NoSuchElementException+ if this is a +Left+.
+      def get
+        if either_value.right? then either_value.right_value else raise NoSuchElementError end
       end
     end
   end

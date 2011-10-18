@@ -114,4 +114,11 @@ class EitherTest < Test::Unit::TestCase
     assert_monad_axiom_2(Right(42).right)
     assert_monad_axiom_3(Right(42).right, lambda { |x| Right(x * 2).right }, lambda { |x| Right(x * 5).right })
   end
+
+  def test_get_for_left_and_right_projections_returns_value_if_correct_type_or_raises
+    assert_equal "error", Left("error").left.get
+    assert_raises(NoSuchElementError) { Left("error").right.get }
+    assert_equal 42, Right(42).right.get
+    assert_raises(NoSuchElementError) { Right(42).left.get }
+  end
 end

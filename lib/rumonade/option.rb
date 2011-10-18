@@ -123,9 +123,6 @@ module Rumonade # :nodoc:
     end
   end
 
-  # Exception raised on attempts to access the value of None
-  class NoSuchElementError < RuntimeError; end
-
   # Returns an Option wrapping the given value: Some if non-nil, None if nil
   def Option(value)
     value.nil? ? None : Some(value)
