@@ -96,10 +96,8 @@ class EitherTest < Test::Unit::TestCase
   end
 
   def test_unit_for_left_and_right_projections
-    assert_equal Left("error").left, Either::LeftProjection.unit(Left("error"))
-    assert_equal Left("error").right, Either::RightProjection.unit(Left("error"))
-    assert_equal Right(42).right, Either::RightProjection.unit(Right(42))
-    assert_equal Right(42).left, Either::LeftProjection.unit(Right(42))
+    assert_equal Left("error").left, Either::LeftProjection.unit("error")
+    assert_equal Right(42).right, Either::RightProjection.unit(42)
   end
 
   def test_empty_for_left_and_right_projections
