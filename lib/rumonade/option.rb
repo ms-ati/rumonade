@@ -35,22 +35,24 @@ module Rumonade # :nodoc:
   #       puts "No name value"
   #   end
   #
+  # @abstract
   class Option
     class << self
-      # Returns a new Option containing the given value
+      # @return [Option] Returns an +Option+ containing the given value
       def unit(value)
         Rumonade.Option(value)
       end
 
-      # Returns the empty Option (None)
+      # @return [Option] Returns the empty +Option+
       def empty
         None
       end
     end
 
-    def initialize # :nodoc:
+    def initialize
       raise(TypeError, "class Option is abstract; cannot be instantiated") if self.class == Option
     end
+    private :initialize
 
     # Returns None if None, or the result of executing the given block or lambda on the contents if Some
     def bind(lam = nil, &blk)
@@ -59,7 +61,7 @@ module Rumonade # :nodoc:
 
     include Monad
 
-    # Returns +true+ if None, +false+ if Some
+    # @return [Boolean] Returns +true+ if +None+, +false+ if +Some+
     def empty?
       raise(NotImplementedError)
     end
@@ -89,6 +91,7 @@ module Rumonade # :nodoc:
 
     attr_reader :value # :nodoc:
 
+    # @return (see Option#empty?)
     def empty?
       false
     end
@@ -106,6 +109,7 @@ module Rumonade # :nodoc:
   class NoneClass < Option
     include Singleton
 
+    # @return (see Option#empty?)
     def empty?
       true
     end

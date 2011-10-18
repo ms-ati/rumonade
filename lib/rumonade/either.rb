@@ -94,12 +94,12 @@ module Rumonade
     # Projects an Either into a Left.
     class LeftProjection
       class << self
-        # Returns a +LeftProjection+ of the +Left+ of the given value
+        # @return [LeftProjection] Returns a +LeftProjection+ of the +Left+ of the given value
         def unit(value)
           self.new(Left(value))
         end
 
-        # Returns the empty +LeftProjection+ (over a +Right+)
+        # @return [LeftProjection] Returns the empty +LeftProjection+
         def empty
           self.new(Right(nil))
         end
@@ -144,12 +144,12 @@ module Rumonade
     # Projects an Either into a Right.
     class RightProjection
       class << self
-        # Returns a +RightProjection+ of the +Right+ of the given value
+        # @return [RightProjection] Returns a +RightProjection+ of the +Right+ of the given value
         def unit(value)
           self.new(Right(value))
         end
 
-        # Returns the empty +RightProjection+ (over a +Left+)
+        # @return [RightProjection] Returns the empty +RightProjection+
         def empty
           self.new(Left(nil))
         end
