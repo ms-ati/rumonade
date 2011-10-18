@@ -138,4 +138,12 @@ class EitherTest < Test::Unit::TestCase
     assert_equal Some(42), Right(42).right.to_opt
     assert_equal None, Right(42).left.to_opt
   end
+
+  def test_to_a_for_left_and_right_projections_returns_single_element_Array_if_correct_type_or_zero_element_Array
+    assert_equal ["error"], Left("error").left.to_a
+    assert_equal [], Left("error").right.to_a
+    assert_equal [42], Right(42).right.to_a
+    assert_equal [], Right(42).left.to_a
+  end
+
 end
