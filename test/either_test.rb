@@ -121,4 +121,14 @@ class EitherTest < Test::Unit::TestCase
     assert_equal 42, Right(42).right.get
     assert_raises(NoSuchElementError) { Right(42).left.get }
   end
+
+  def test_get_or_else_for_left_and_right_projections_returns_value_if_correct_type_or_returns_value_or_executes_block
+    assert_equal "error", Left("error").left.get_or_else(:other_value)
+    assert_equal :other_value, Left("error").right.get_or_else(:other_value)
+    assert_equal :value_of_block, Left("error").right.get_or_else(lambda { :value_of_block })
+
+    assert_equal 42, Right(42).right.get_or_else(:other_value)
+    assert_equal :other_value, Right(42).left.get_or_else(:other_value)
+    assert_equal :value_of_block, Right(42).left.get_or_else(lambda { :value_of_block })
+  end
 end

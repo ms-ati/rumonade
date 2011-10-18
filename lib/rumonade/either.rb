@@ -144,6 +144,12 @@ module Rumonade
       def get
         if either_value.left? then either_value.left_value else raise NoSuchElementError end
       end
+
+      # Returns the value from this +Left+ or the given argument if this is a +Right+.
+      def get_or_else(val_or_lam = nil, &blk)
+        v_or_f = val_or_lam || blk
+        if either_value.left? then either_value.left_value else (v_or_f.respond_to?(:call) ? v_or_f.call : v_or_f) end
+      end
     end
 
     # Projects an Either into a Right.
@@ -198,6 +204,12 @@ module Rumonade
       # Returns the value from this +Right+ or raises +NoSuchElementException+ if this is a +Left+.
       def get
         if either_value.right? then either_value.right_value else raise NoSuchElementError end
+      end
+
+      # Returns the value from this +Right+ or the given argument if this is a +Left+.
+      def get_or_else(val_or_lam = nil, &blk)
+        v_or_f = val_or_lam || blk
+        if either_value.right? then either_value.right_value else (v_or_f.respond_to?(:call) ? v_or_f.call : v_or_f) end
       end
     end
   end
