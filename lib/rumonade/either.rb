@@ -1,4 +1,3 @@
-require 'singleton'
 require 'rumonade/monad'
 
 module Rumonade
