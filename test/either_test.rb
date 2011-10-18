@@ -94,4 +94,26 @@ class EitherTest < Test::Unit::TestCase
     assert side_effect_occurred_on_each(Right(42).right)
     assert !side_effect_occurred_on_each(Right(42).left)
   end
+
+  def test_unit_for_left_and_right_projections
+    assert_equal Left("error").left, Either::LeftProjection.unit(Left("error"))
+    assert_equal Left("error").right, Either::RightProjection.unit(Left("error"))
+    assert_equal Right(42).right, Either::RightProjection.unit(Right(42))
+    assert_equal Right(42).left, Either::LeftProjection.unit(Right(42))
+  end
+
+  def test_empty_for_left_and_right_projections
+    assert_equal Right(nil).left, Either::LeftProjection.empty
+    assert_equal Left(nil).right, Either::RightProjection.empty
+  end
+
+  def test_monad_axioms_for_left_and_right_projections
+    assert_monad_axiom_1(Either::LeftProjection, "error", lambda { |x| Left(x * 2).left })
+    assert_monad_axiom_2(Left("error").left)
+    assert_monad_axiom_3(Left("error").left, lambda { |x| Left(x * 2).left }, lambda { |x| Left(x * 5).left })
+
+    assert_monad_axiom_1(Either::RightProjection, 42, lambda { |x| Right(x * 2).right })
+    assert_monad_axiom_2(Right(42).right)
+    assert_monad_axiom_3(Right(42).right, lambda { |x| Right(x * 2).right }, lambda { |x| Right(x * 5).right })
+  end
 end
