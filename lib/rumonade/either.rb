@@ -60,6 +60,11 @@ module Rumonade
     def ==(other)
       other.is_a?(Left) && other.left_value == self.left_value
     end
+
+    # @return [String] Returns a +String+ representation of this object.
+    def to_s
+      "Left(#{left_value})"
+    end
   end
 
   # The right side of the disjoint union, as opposed to the Left side.
@@ -75,6 +80,11 @@ module Rumonade
     # @return [Boolean] Returns +true+ if other is a +Right+ with an equal right value
     def ==(other)
       other.is_a?(Right) && other.right_value == self.right_value
+    end
+
+    # @return [String] Returns a +String+ representation of this object.
+    def to_s
+      "Right(#{right_value})"
     end
   end
 
@@ -160,6 +170,11 @@ module Rumonade
       def map(lam = nil, &blk)
         bind { |v| Left((lam || blk).call(v)) }
       end
+
+      # @return [String] Returns a +String+ representation of this object.
+      def to_s
+        "LeftProjection(#{either_value})"
+      end
     end
 
     # Projects an Either into a Right.
@@ -230,6 +245,11 @@ module Rumonade
       # @return [Either] Maps the function argument through +Right+.
       def map(lam = nil, &blk)
         bind { |v| Right((lam || blk).call(v)) }
+      end
+
+      # @return [String] Returns a +String+ representation of this object.
+      def to_s
+        "RightProjection(#{either_value})"
       end
     end
   end

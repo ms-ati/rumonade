@@ -152,4 +152,11 @@ class EitherTest < Test::Unit::TestCase
     assert_equal Right(420), Right(42).right.map { |s| s * 10 }
     assert_equal Right(42), Right(42).left.map { |s| s * 10 }
   end
+
+  def test_to_s_for_left_and_right_and_their_projections
+    assert_equal "Left(error)", Left("error").to_s
+    assert_equal "Right(42)", Right(42).to_s
+    assert_equal "RightProjection(Left(error))", Left("error").right.to_s
+    assert_equal "LeftProjection(Right(42))", Right(42).left.to_s
+  end
 end
