@@ -101,14 +101,21 @@ module Rumonade
       # @return Returns the Either value
       attr_reader :either_value
 
+      # @return [Boolean] Returns +true+ if other is a +LeftProjection+ with an equal +Either+ value
       def ==(other)
         other.is_a?(LeftProjection) && other.either_value == self.either_value
       end
 
+      # Binds the given function across +Left+.
       def bind(lam = nil, &blk)
-        !either_value.left? ? either_value : (lam || blk).call(either_value.left_value)
+        if !either_value.left? then either_value else (lam || blk).call(either_value.left_value) end
       end
       alias_method :flat_map, :bind
+
+      # @return [Boolean] Returns +false+ if +Right+ or returns the result of the application of the given function to the +Left+ value.
+      def any?(lam = nil, &blk)
+        either_value.left? && bind(lam || blk)
+      end
     end
 
     # Projects an Either into a Right.
@@ -121,14 +128,21 @@ module Rumonade
       # @return Returns the Either value
       attr_reader :either_value
 
+      # @return [Boolean] Returns +true+ if other is a +RightProjection+ with an equal +Either+ value
       def ==(other)
         other.is_a?(RightProjection) && other.either_value == self.either_value
       end
 
+      # Binds the given function across +Right+.
       def bind(lam = nil, &blk)
-        !either_value.right? ? either_value : (lam || blk).call(either_value.right_value)
+        if !either_value.right? then either_value else (lam || blk).call(either_value.right_value) end
       end
       alias_method :flat_map, :bind
+
+      # @return [Boolean] Returns +false+ if +Left+ or returns the result of the application of the given function to the +Right+ value.
+      def any?(lam = nil, &blk)
+        either_value.right? && bind(lam || blk)
+      end
     end
   end
 end

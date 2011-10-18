@@ -50,4 +50,14 @@ class EitherTest < Test::Unit::TestCase
     assert_equal Right("ERROR"), Left("error").left.flat_map { |n| Right(n.upcase) }
     assert_equal Left("error"), Left("error").right.flat_map { |n| Right(n.upcase) }
   end
+
+  def test_any_predicate_for_left_and_right_projections_returns_true_if_correct_type_and_block_returns_true
+    assert Left("error").left.any? { |s| s == "error" }
+    assert !Left("error").left.any? { |s| s != "error" }
+    assert !Left("error").right.any? { |s| s == "error" }
+
+    assert Right(42).right.any? { |n| n == 42 }
+    assert !Right(42).right.any? { |n| n != 42 }
+    assert !Right(42).left.any? { |n| n == 42 }
+  end
 end
