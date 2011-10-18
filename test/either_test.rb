@@ -60,4 +60,14 @@ class EitherTest < Test::Unit::TestCase
     assert !Right(42).right.any? { |n| n != 42 }
     assert !Right(42).left.any? { |n| n == 42 }
   end
+
+  def test_select_for_left_and_right_projects_returns_option_of_either_if_correct_type_and_block_returns_true
+    assert_equal Some(Left("error")), Left("error").left.select { |s| s == "error" }
+    assert_equal None, Left("error").left.select { |s| s != "error" }
+    assert_equal None, Left("error").right.select { |s| s == "error" }
+
+    assert_equal Some(Right(42)), Right(42).right.select { |n| n == 42 }
+    assert_equal None, Right(42).right.select { |n| n != 42 }
+    assert_equal None, Right(42).left.select { |n| n == 42 }    
+  end
 end

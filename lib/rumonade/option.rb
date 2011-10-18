@@ -127,7 +127,7 @@ module Rumonade # :nodoc:
     value.nil? ? None : Some(value)
   end
 
-  # Returns a Some wrapping the given value, for convenience
+  # @return [Some] Returns a +Some+ wrapping the given value, for convenience
   def Some(value)
     Some.new(value)
   end
