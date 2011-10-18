@@ -2,7 +2,7 @@
 
 Project: github[http://github.com/ms-ati/rumonade]
 
-Documentation: rubydoc.info[http://rubydoc.info/gems/rumonade/file/README.rdoc]
+Documentation: rubydoc.info[http://rubydoc.info/gems/rumonade/0.2.0/file/README.rdoc]
 
 == A Ruby[http://www.ruby-lang.org] Monad[http://en.wikipedia.org/wiki/Monad_(functional_programming)] Library, Inspired by Scala[http://www.scala-lang.org]
 
@@ -71,5 +71,5 @@ The priorities for Rumonade are:
 
 == Status
 
-This code is in a very early state, but the Option monad is already present.
+Option, Either, and Array are complete.
 Please try it out, and let me know what you think!

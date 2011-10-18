@@ -1,3 +1,7 @@
+=== 0.2.0 / 2011-10-18
+
+* scala-like Either class w/ LeftProjection and RightProjection monads
+
 === 0.1.2 / 2011-10-12
 
 * Progress towards Either
