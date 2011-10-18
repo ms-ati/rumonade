@@ -70,4 +70,14 @@ class EitherTest < Test::Unit::TestCase
     assert_equal None, Right(42).right.select { |n| n != 42 }
     assert_equal None, Right(42).left.select { |n| n == 42 }    
   end
+  
+  def test_all_predicate_for_left_and_right_projections_returns_true_if_correct_type_and_block_returns_true
+    assert Left("error").left.all? { |s| s == "error" }
+    assert !Left("error").left.all? { |s| s != "error" }
+    assert Left("error").right.all? { |s| s == "error" }
+
+    assert Right(42).right.all? { |n| n == 42 }
+    assert !Right(42).right.all? { |n| n != 42 }
+    assert Right(42).left.all? { |n| n == 42 }
+  end  
 end

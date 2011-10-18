@@ -121,6 +121,11 @@ module Rumonade
       def select(lam = nil, &blk)
         Some(self).select { |lp| lp.any?(lam || blk) }.map { |lp| lp.either_value }
       end
+
+      # @return [Boolean] Returns +true+ if +Right+ or returns the result of the application of the given function to the +Left+ value.
+      def all?(lam = nil, &blk)
+        !either_value.left? || bind(lam || blk)
+      end
     end
 
     # Projects an Either into a Right.
@@ -152,6 +157,11 @@ module Rumonade
       # @return [Option] Returns +None+ if this is a +Left+ or if the given predicate does not hold for the +Right+ value, otherwise, returns a +Some+ of +Right+.
       def select(lam = nil, &blk)
         Some(self).select { |lp| lp.any?(lam || blk) }.map { |lp| lp.either_value }
+      end
+
+      # @return [Boolean] Returns +true+ if +Left+ or returns the result of the application of the given function to the +Right+ value.
+      def all?(lam = nil, &blk)
+        !either_value.right? || bind(lam || blk)
       end
     end
   end
