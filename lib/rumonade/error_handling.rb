@@ -31,6 +31,15 @@ module Rumonade
       PartialFunction.new(lambda { |x| self.defined_at?(x) || other.defined_at?(x) },
                           lambda { |x| if self.defined_at?(x) then self.call(x) else other.call(x) end })
     end
+
+    # Composes this partial function with a transformation function that
+    # gets applied to results of this partial function.
+    # @param  [Proc] func the transformation function
+    # @return [PartialFunction] a partial function with the same domain as this partial function, which maps
+    #         arguments +x+ to +func.call(self.call(x))+.
+    def and_then(func)
+      PartialFunction.new(@defined_at_proc, lambda { |x| func.call(self.call(x)) })
+    end
   end
 
   # Classes representing the components of exception handling.
