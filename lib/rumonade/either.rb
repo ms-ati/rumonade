@@ -110,7 +110,8 @@ module Rumonade
       def bind(lam = nil, &blk)
         if !either_value.left? then either_value else (lam || blk).call(either_value.left_value) end
       end
-      alias_method :flat_map, :bind
+
+      include Monad
 
       # @return [Boolean] Returns +false+ if +Right+ or returns the result of the application of the given function to the +Left+ value.
       def any?(lam = nil, &blk)
@@ -147,7 +148,8 @@ module Rumonade
       def bind(lam = nil, &blk)
         if !either_value.right? then either_value else (lam || blk).call(either_value.right_value) end
       end
-      alias_method :flat_map, :bind
+
+      include Monad
 
       # @return [Boolean] Returns +false+ if +Left+ or returns the result of the application of the given function to the +Right+ value.
       def any?(lam = nil, &blk)

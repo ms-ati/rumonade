@@ -80,4 +80,18 @@ class EitherTest < Test::Unit::TestCase
     assert !Right(42).right.all? { |n| n != 42 }
     assert Right(42).left.all? { |n| n == 42 }
   end  
+
+  def test_each_for_left_and_right_projections_executes_block_if_correct_type
+    def side_effect_occurred_on_each(projection)
+      side_effect_occurred = false
+      projection.each { |s| side_effect_occurred = true }
+      side_effect_occurred
+    end
+
+    assert side_effect_occurred_on_each(Left("error").left)
+    assert !side_effect_occurred_on_each(Left("error").right)
+
+    assert side_effect_occurred_on_each(Right(42).right)
+    assert !side_effect_occurred_on_each(Right(42).left)
+  end
 end
