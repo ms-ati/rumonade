@@ -155,6 +155,11 @@ module Rumonade
       def to_opt
         Option(get_or_else(nil))
       end
+
+      # @return [Either] Maps the function argument through +Left+.
+      def map(lam = nil, &blk)
+        bind { |v| Left((lam || blk).call(v)) }
+      end
     end
 
     # Projects an Either into a Right.
@@ -220,6 +225,11 @@ module Rumonade
       # @return [Option] Returns a +Some+ containing the +Right+ value if it exists or a +None+ if this is a +Left+.
       def to_opt
         Option(get_or_else(nil))
+      end
+
+      # @return [Either] Maps the function argument through +Right+.
+      def map(lam = nil, &blk)
+        bind { |v| Right((lam || blk).call(v)) }
       end
     end
   end

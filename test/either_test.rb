@@ -146,4 +146,10 @@ class EitherTest < Test::Unit::TestCase
     assert_equal [], Right(42).left.to_a
   end
 
+  def test_map_for_left_and_right_projections_returns_same_projection_type_of_new_value_if_correct_type
+    assert_equal Left(:ERROR), Left("error").left.map { |s| s.upcase.to_sym }
+    assert_equal Left("error"), Left("error").right.map { |s| s.upcase.to_sym }
+    assert_equal Right(420), Right(42).right.map { |s| s * 10 }
+    assert_equal Right(42), Right(42).left.map { |s| s * 10 }
+  end
 end
