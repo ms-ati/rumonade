@@ -53,5 +53,15 @@ module Rumonade
   #   x2 = catching(URI::InvalidURIError, NoMethodError).either { URI.parse(s) }
   #
   module ErrorHandling
+
+    # Should re-raise exceptions like +Interrupt+ and +NoMemoryError+ by default.
+    # @param [Exception] ex the exception to consider re-raising
+    # @return [Boolean] Returns +true+ if a subclass of +StandardError+, otherwise +false+.
+    def should_reraise?(ex)
+      case ex
+        when StandardError; false
+        else true
+      end
+    end
   end
 end

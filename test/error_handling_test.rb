@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
 class ErrorHandlingTest < Test::Unit::TestCase
   include Rumonade
+  include Rumonade::ErrorHandling
 
   def test_partial_function_constructor_delegates_call_and_defined_at_to_given_procs
     pf = PartialFunction.new(lambda { |x| x < 1000 }, lambda { |x| x * 10 })
@@ -30,5 +31,10 @@ class ErrorHandlingTest < Test::Unit::TestCase
     pf = PartialFunction.new(lambda { |x| x < 1000 }, lambda { |x| x * 10 })
       .and_then(lambda { |x| x / 5 })
     assert_equal 1800, pf.call(900)
+  end
+
+  def test_should_reraise_returns_true_if_not_subclass_of_standard_error
+    assert should_reraise?(NoMemoryError.new)
+    assert !should_reraise?(ZeroDivisionError.new)
   end
 end
