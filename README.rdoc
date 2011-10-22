@@ -2,7 +2,7 @@
 
 Project: github[http://github.com/ms-ati/rumonade]
 
-Documentation: rubydoc.info[http://rubydoc.info/gems/rumonade/0.2.0/file/README.rdoc]
+Documentation: rubydoc.info[http://rubydoc.info/gems/rumonade/0.2.1/file/README.rdoc]
 
 == A Ruby[http://www.ruby-lang.org] Monad[http://en.wikipedia.org/wiki/Monad_(functional_programming)] Library, Inspired by Scala[http://www.scala-lang.org]
 
