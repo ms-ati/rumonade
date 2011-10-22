@@ -40,7 +40,7 @@ module Rumonade # :nodoc:
     class << self
       # @return [Option] Returns an +Option+ containing the given value
       def unit(value)
-        Rumonade.Option(value)
+        Rumonade.Some(value)
       end
 
       # @return [Option] Returns the empty +Option+

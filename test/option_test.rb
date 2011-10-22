@@ -4,10 +4,10 @@ class OptionTest < Test::Unit::TestCase
   include Rumonade
   include MonadAxiomTestHelpers
 
-  def test_when_option_with_nil_returns_none_singleton
-    assert_same None, Option.unit(nil)
+  def test_when_option_with_nil_returns_none_singleton_except_unit
     assert_same None, Option(nil)
     assert_same NoneClass.instance, None
+    assert_not_equal None, Option.unit(nil)
   end
 
   def test_when_option_with_value_returns_some
@@ -15,6 +15,7 @@ class OptionTest < Test::Unit::TestCase
     assert_equal Some(42), Option(42)
     assert_equal Some(42), Some.new(42)
     assert_not_equal None, Some(nil)
+    assert_equal Some(nil), Option.unit(nil)
   end
 
   def test_when_option_constructor_raises
@@ -108,5 +109,11 @@ class OptionTest < Test::Unit::TestCase
     assert_equal Some(1), Some(1).select { |n| n > 0 }
     assert_equal None, Some(1).select { |n| n < 0 }
     assert_equal None, None.select { |n| n < 0 }
+  end
+
+  def test_some_map_to_nil_follows_scala_behavior_returning_some_of_nil
+    # scala> Option(1).map { x => null }
+    # res0: Option[Null] = Some(null)
+    assert_equal Some(nil), Option(1).map { |n| nil }
   end
 end
