@@ -85,6 +85,7 @@ class OptionTest < Test::Unit::TestCase
     assert_equal "Some(1)", Some(1).to_s
     assert_equal "None", None.to_s
     assert_equal "Some(Some(None))", Some(Some(None)).to_s
+    assert_equal "Some(nil)", Some(nil).to_s
   end
 
   def test_each_behaves_correctly

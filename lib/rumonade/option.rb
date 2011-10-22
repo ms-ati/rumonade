@@ -101,7 +101,7 @@ module Rumonade # :nodoc:
     end
 
     def to_s
-      "Some(#{value.to_s})"
+      "Some(#{value.nil? ? 'nil' : value.to_s})"
     end
   end
 
