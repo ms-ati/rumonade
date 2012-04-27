@@ -43,6 +43,16 @@ module Rumonade
     def right
       RightProjection.new(self)
     end
+
+    # @param [Either] other the either to combine with
+    # @return [Either] Returns a +Left+ with all Left values (if any), otherwise a +Right+ with all Right values
+    def +(other)
+      if [self, other].any?(&:left?)
+        Left([self, other].map { |either| either.left.to_opt }.flatten)
+      else
+        Right([self, other].map { |either| either.right.to_opt }.flatten)
+      end
+    end
   end
 
   # The left side of the disjoint union, as opposed to the Right side.

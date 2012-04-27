@@ -159,4 +159,9 @@ class EitherTest < Test::Unit::TestCase
     assert_equal "RightProjection(Left(error))", Left("error").right.to_s
     assert_equal "LeftProjection(Right(42))", Right(42).left.to_s
   end
+
+  def test_plus_for_left_and_right
+    assert_equal Left(["bad", "worse"]), Left("bad") + Right(:good) + Left("worse") + Right(:good)
+    assert_equal Right([:good, :better]), Right(:good) + Right(:better)
+  end
 end
