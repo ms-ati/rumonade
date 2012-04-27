@@ -1,5 +1,10 @@
 # HISTORY
 
+## v0.2.2 (Apr 26, 2012)
+
+  - added Either#+ to allow combining validations
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.2.1...v0.2.2
+
 ## v0.2.1 (Oct 22, 2011)
 
   - fixed Option#map to disallow becoming None on a nil result
