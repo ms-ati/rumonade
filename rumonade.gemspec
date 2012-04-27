@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.add_development_dependency "test-unit"
-  #s.add_development_dependency "rr"
+  s.add_development_dependency "rake"
 end
