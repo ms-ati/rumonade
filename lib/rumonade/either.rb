@@ -44,15 +44,31 @@ module Rumonade
       RightProjection.new(self)
     end
 
-    # @param [Either] other the either to combine with
-    # @return [Either] Returns a +Left+ with all Left values (if any), otherwise a +Right+ with all Right values
-    def +(other)
-      if [self, other].any?(&:left?)
-        Left([self, other].map { |either| either.left.to_opt }.flatten)
-      else
-        Right([self, other].map { |either| either.right.to_opt }.flatten)
+    # Default concatenation function used by {#+}
+    DEFAULT_CONCAT = lambda { |a,b| a + b }
+
+    # @param [Either] other the other +Either+ to concatenate
+    # @param [Hash] opts the options to concatenate with
+    # @option opts [Proc] :concat_left (DEFAULT_CONCAT) The function to concatenate +Left+ values
+    # @option opts [Proc] :concat_right (DEFAULT_CONCAT) the function to concatenate +Right+ values
+    # @return [Either] if both are +Right+, returns +Right+ with +right_value+'s concatenated,
+    #                  otherwise a +Left+ with +left_value+'s concatenated
+    def +(other, opts = {})
+      opts = { :concat_left  => DEFAULT_CONCAT, :concat_right => DEFAULT_CONCAT }.merge(opts)
+      case self
+        when Left
+          case other
+            when Left then Left(opts[:concat_left].call(self.left_value, other.left_value))
+            when Right then Left(self.left_value)
+          end
+        when Right
+          case other
+            when Left then Left(other.left_value)
+            when Right then Right(opts[:concat_right].call(self.right_value, other.right_value))
+          end
       end
     end
+    alias_method :concat, :+
   end
 
   # The left side of the disjoint union, as opposed to the Right side.

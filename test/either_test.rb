@@ -160,8 +160,17 @@ class EitherTest < Test::Unit::TestCase
     assert_equal "LeftProjection(Right(42))", Right(42).left.to_s
   end
 
-  def test_plus_for_left_and_right
-    assert_equal Left(["bad", "worse"]), Left("bad") + Right(:good) + Left("worse") + Right(:good)
-    assert_equal Right([:good, :better]), Right(:good) + Right(:better)
+  def test_plus_concatenates_left_and_right_using_plus_operator
+    assert_equal Left("badworse"), Left("bad") + Right(1) + Left("worse") + Right(2)
+    assert_equal Left(["bad", "worse"]), Left(["bad"]) + Right(1) + Left(["worse"]) + Right(2)
+    assert_equal Right(3), Right(1) + Right(2)
+  end
+
+  def test_concat_concatenates_left_and_right_with_custom_concatenation_function
+    multiply = lambda { |a, b| a * b }
+    assert_equal Left(33), Left(3).concat(Left(11), :concat_left => multiply)
+    assert_equal Left(14), Left(3).concat(Left(11), :concat_right => multiply)
+    assert_equal Right(44), Right(4).concat(Right(11), :concat_right => multiply)
+    assert_equal Right(15), Right(4).concat(Right(11), :concat_left => multiply)
   end
 end
