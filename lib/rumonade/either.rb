@@ -51,22 +51,26 @@ module Rumonade
     # @param [Hash] opts the options to concatenate with
     # @option opts [Proc] :concat_left (DEFAULT_CONCAT) The function to concatenate +Left+ values
     # @option opts [Proc] :concat_right (DEFAULT_CONCAT) the function to concatenate +Right+ values
+    # @yield [right_value] optional block to transform concatenated +Right+ values
+    # @yieldparam [Object] right_values the concatenated +Right+ values yielded to optional block
     # @return [Either] if both are +Right+, returns +Right+ with +right_value+'s concatenated,
     #                  otherwise a +Left+ with +left_value+'s concatenated
     def +(other, opts = {})
       opts = { :concat_left  => DEFAULT_CONCAT, :concat_right => DEFAULT_CONCAT }.merge(opts)
-      case self
-        when Left
-          case other
-            when Left then Left(opts[:concat_left].call(self.left_value, other.left_value))
-            when Right then Left(self.left_value)
-          end
-        when Right
-          case other
-            when Left then Left(other.left_value)
-            when Right then Right(opts[:concat_right].call(self.right_value, other.right_value))
-          end
-      end
+      result =
+        case self
+          when Left
+            case other
+              when Left then Left(opts[:concat_left].call(self.left_value, other.left_value))
+              when Right then Left(self.left_value)
+            end
+          when Right
+            case other
+              when Left then Left(other.left_value)
+              when Right then Right(opts[:concat_right].call(self.right_value, other.right_value))
+            end
+        end
+      if block_given? then result.right.map { |right_values| yield right_values } else result end
     end
     alias_method :concat, :+
 

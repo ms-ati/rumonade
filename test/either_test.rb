@@ -183,4 +183,14 @@ class EitherTest < Test::Unit::TestCase
     assert_equal Left([1, 2]), Left(1).lift_to_a + Right(:a).lift_to_a + Left(2).lift_to_a + Right(:b).lift_to_a
     assert_equal Right([:a, :b]), Right(:a).lift_to_a + Right(:b).lift_to_a
   end
+
+  Person = Struct.new(:name, :age, :address)
+
+  def test_concat_maps_concatenated_right_values_through_a_block
+    assert_equal Right(Person.new("Joe", 23, ["123 Some St", "Boston"])),
+                 Right(["Joe"]).concat(Right([23])).concat(Right([["123 Some St", "Boston"]])) { |n, a, addr| Person.new(n, a, addr) }
+    # this usage is equivalent, but since ruby can't pass a block to a binary operator, must use .right.map on result:
+    assert_equal Right(Person.new("Joe", 23, ["123 Some St", "Boston"])),
+                 (Right(["Joe"]) + Right([23]) + Right([["123 Some St", "Boston"]])).right.map { |n, a, addr| Person.new(n, a, addr) }
+  end
 end
