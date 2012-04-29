@@ -83,7 +83,12 @@ Note:
    find_person("John").lift_to_a +
    find_person("Jill").lift_to_a +
    find_person("Joan").lift_to_a).right.map { |*names| names.join(" and ") }
-  # => Left("No such person: Jill", "No such person: Joan")
+  # => Left(["No such person: Jill", "No such person: Joan"])
+
+  # equivalent to the previous example, but shorter:
+  %w(Jack John Jill Joan).map { |nm| find_person(nm).lift_to_a }.inject(:+).
+    right.map { |*names| names.join(" and ") }
+  # => Left(["No such person: Jill", "No such person: Joan"])
 
 (_more_ _examples_ _coming_ _soon_...)
 
