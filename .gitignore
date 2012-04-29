@@ -6,4 +6,5 @@ pkg/*
 html
 rdoc
 .yardoc
+doc
 
