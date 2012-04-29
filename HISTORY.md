@@ -1,5 +1,10 @@
 # HISTORY
 
+## v0.3.0 (Apr 29, 2012)
+
+  - added Either#lift_to_a (and #lift)
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.2.2...v0.3.0
+
 ## v0.2.2 (Apr 26, 2012)
 
   - added Either#+ to allow combining validations
