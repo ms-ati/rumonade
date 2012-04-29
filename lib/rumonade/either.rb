@@ -69,6 +69,19 @@ module Rumonade
       end
     end
     alias_method :concat, :+
+
+    # @return [Either] returns an +Either+ of the same type, with the +left_value+ or +right_value+
+    #                  lifted into an +Array+
+    def lift_to_a
+      lift(Array)
+    end
+
+    # @param [#unit] monad_class the {Monad} to lift the +Left+ or +Right+ value into
+    # @return [Either] returns an +Either+of the same type, with the +left_value+ or +right_value+
+    #                  lifted into +monad_class+
+    def lift(monad_class)
+      fold(lambda {|l| Left(monad_class.unit(l)) }, lambda {|r| Right(monad_class.unit(r))})
+    end
   end
 
   # The left side of the disjoint union, as opposed to the Right side.

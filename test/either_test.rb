@@ -173,4 +173,14 @@ class EitherTest < Test::Unit::TestCase
     assert_equal Right(44), Right(4).concat(Right(11), :concat_right => multiply)
     assert_equal Right(15), Right(4).concat(Right(11), :concat_left => multiply)
   end
+
+  def test_lift_to_a_wraps_left_and_right_values_in_array
+    assert_equal Left(["error"]), Left("error").lift_to_a
+    assert_equal Right([42]), Right(42).lift_to_a
+  end
+
+  def test_plus_and_lift_to_a_work_together_to_concatenate_errors
+    assert_equal Left([1, 2]), Left(1).lift_to_a + Right(:a).lift_to_a + Left(2).lift_to_a + Right(:b).lift_to_a
+    assert_equal Right([:a, :b]), Right(:a).lift_to_a + Right(:b).lift_to_a
+  end
 end
