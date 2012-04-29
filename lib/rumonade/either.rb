@@ -5,6 +5,10 @@ module Rumonade
   # The data constructors {Rumonade::Left} and {Rumonade::Right} represent the two possible values.
   # The +Either+ type is often used as an alternative to {Rumonade::Option} where {Rumonade::Left} represents
   # failure (by convention) and {Rumonade::Right} is akin to {Rumonade::Some}.
+  #
+  # This implementation of +Either+ also contains ideas from the +Validation+ class in the
+  # +scalaz+ library.
+  #
   # @abstract
   class Either
     def initialize

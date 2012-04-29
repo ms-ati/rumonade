@@ -2,9 +2,9 @@
 
 = Rumonade[https://rubygems.org/gems/rumonade]
 
-Project: github[http://github.com/ms-ati/rumonade]
+*_Project_*: github[http://github.com/ms-ati/rumonade]
 
-Documentation: rubydoc.info[http://rubydoc.info/gems/rumonade/frames]
+*_Documentation_*: rubydoc.info[http://rubydoc.info/gems/rumonade/frames]
 
 == A Ruby[http://www.ruby-lang.org] Monad[http://en.wikipedia.org/wiki/Monad_(functional_programming)] Library, Inspired by Scala[http://www.scala-lang.org]
 
@@ -28,9 +28,9 @@ Support for an all_catch[http://www.scala-lang.org/archives/downloads/distrib/fi
 idiom will be implemented to turn blocks which might throw exceptions into Option or Either
 results. If this proves useful (and a good fit for Ruby), then more narrow functional catchers can be implemented as well.
 
-== Usage
+== Usage Examples
 
-==== {Rumonade::Option Option}: handle _possibly_ _nil_ values in a _functional_ fashion:
+=== {Rumonade::Option Option}: handle _possibly_ _nil_ values in a _functional_ fashion:
 
   def format_date_in_march(time_or_date_or_nil)
     Option(time_or_date_or_nil).      # wraps possibly-nil value in an Option monad (Some or None)
@@ -49,7 +49,8 @@ Note:
 * each step of the chained computations above are functionally isolated
 * the value can notionally _start_ as nil, or _become_ nil during a computation, without effecting any other chained computations
 
-==== {Rumonade::Either Either}: handle failures ({Rumonade::Left Left}) and successes ({Rumonade::Right Right}) in a _functional_ fashion:
+---
+=== {Rumonade::Either Either}: handle failures ({Rumonade::Left Left}) and successes ({Rumonade::Right Right}) in a _functional_ fashion:
 
   def find_person(name)
     case name
@@ -68,15 +69,20 @@ Note:
   find_person("Jill")
   # => Left("No such person: Jill")
 
-  # on the 'happy path', we can functionally combine and transform successes:
-  (find_person("Jack").lift_to_a + find_person("John").lift_to_a).right.map { |*names| names.join(" and ") }
+  # lift the contained values into Array, in order to combine them:
+  find_person("Joan").lift_to_a
+  # => Left(["No such person: Joan"])
+
+  # on the 'happy path', combine and transform successes into a single success result:
+  (find_person("Jack").lift_to_a +
+   find_person("John").lift_to_a).right.map { |*names| names.join(" and ") }
   # => Right("Jack and John")
 
-  # while the failure cases are easily handled as well:
+  # but if there were errors, we still have a Left with all the errors inside:
   (find_person("Jack").lift_to_a +
    find_person("John").lift_to_a +
    find_person("Jill").lift_to_a +
-   find_person("Joan").lift_to_a    ).right.map { |*names| names.join(" and ") }
+   find_person("Joan").lift_to_a).right.map { |*names| names.join(" and ") }
   # => Left("No such person: Jill", "No such person: Joan")
 
 (_more_ _examples_ _coming_ _soon_...)
@@ -96,12 +102,14 @@ The priorities for Rumonade are:
    * <b>don't</b> mess up normal idioms of the language (e.g., Hash#map)
    * <b>don't</b> slow down normal idioms of the language (e.g., Array#map)
 2. Rubyish-ness of usage
-   * Monad is a mix-in, requiring methods self.unit and #bind be implemented by target classes
-   * Prefer blocks to lambda/Procs where possible
+   * Monad is a mix-in, requiring methods +self.unit+ and +#bind+ be implemented by target classes
+   * Prefer blocks to lambda/Procs where possible, but allow both
 3. Equivalent idioms to Scala where possible
 
 == Status
 
-Option, Either, and Array are complete.
-Supported Ruby versions: MRI 1.9.2, MRI 1.9.3, JRuby in 1.9 mode, and Rubinius in 1.9 mode.
-Please try it out, and let me know what you think!
+Option, Either, and Array are already usable.
+
+<b><em>Supported Ruby versions</em></b>: MRI 1.9.2, MRI 1.9.3, JRuby in 1.9 mode, and Rubinius in 1.9 mode.
+
+Please try it out, and let me know what you think! Suggestions are always welcome.
