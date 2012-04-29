@@ -76,7 +76,7 @@ Note:
   (find_person("Jack").lift_to_a +
    find_person("John").lift_to_a +
    find_person("Jill").lift_to_a +
-   find_person("Joan").lift_to_a).right.map { |*names| names.join(" and ") }
+   find_person("Joan").lift_to_a    ).right.map { |*names| names.join(" and ") }
   # => Left("No such person: Jill", "No such person: Joan")
 
 (_more_ _examples_ _coming_ _soon_...)
@@ -103,4 +103,5 @@ The priorities for Rumonade are:
 == Status
 
 Option, Either, and Array are complete.
+Supported Ruby versions: MRI 1.9.2, MRI 1.9.3, JRuby in 1.9 mode, and Rubinius in 1.9 mode.
 Please try it out, and let me know what you think!
