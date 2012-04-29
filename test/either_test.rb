@@ -160,6 +160,13 @@ class EitherTest < Test::Unit::TestCase
     assert_equal "LeftProjection(Right(42))", Right(42).left.to_s
   end
 
+  def test_inspect_for_left_and_right_and_their_projections
+    assert_equal "Left(\"error\")", Left("error").inspect
+    assert_equal "Right(\"success\")", Right("success").inspect
+    assert_equal "RightProjection(Left(\"error\"))", Left("error").right.inspect
+    assert_equal "LeftProjection(Right(\"success\"))", Right("success").left.inspect
+  end
+
   def test_plus_concatenates_left_and_right_using_plus_operator
     assert_equal Left("badworse"), Left("bad") + Right(1) + Left("worse") + Right(2)
     assert_equal Left(["bad", "worse"]), Left(["bad"]) + Right(1) + Left(["worse"]) + Right(2)

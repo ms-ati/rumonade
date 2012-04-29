@@ -107,6 +107,11 @@ module Rumonade
     def to_s
       "Left(#{left_value})"
     end
+
+    # @return [String] Returns a +String+ containing a human-readable representation of this object.
+    def inspect
+      "Left(#{left_value.inspect})"
+    end
   end
 
   # The right side of the disjoint union, as opposed to the Left side.
@@ -127,6 +132,11 @@ module Rumonade
     # @return [String] Returns a +String+ representation of this object.
     def to_s
       "Right(#{right_value})"
+    end
+
+    # @return [String] Returns a +String+ containing a human-readable representation of this object.
+    def inspect
+      "Right(#{right_value.inspect})"
     end
   end
 
@@ -217,6 +227,11 @@ module Rumonade
       def to_s
         "LeftProjection(#{either_value})"
       end
+
+      # @return [String] Returns a +String+ containing a human-readable representation of this object.
+      def inspect
+        "LeftProjection(#{either_value.inspect})"
+      end
     end
 
     # Projects an Either into a Right.
@@ -292,6 +307,11 @@ module Rumonade
       # @return [String] Returns a +String+ representation of this object.
       def to_s
         "RightProjection(#{either_value})"
+      end
+
+      # @return [String] Returns a +String+ containing a human-readable representation of this object.
+      def inspect
+        "RightProjection(#{either_value.inspect})"
       end
     end
   end
