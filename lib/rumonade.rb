@@ -26,6 +26,7 @@ require "rumonade/monad"
 require "rumonade/lazy_identity"
 require "rumonade/option"
 require "rumonade/array"
+require "rumonade/hash"
 require "rumonade/either"
 require "rumonade/error_handling"
 
