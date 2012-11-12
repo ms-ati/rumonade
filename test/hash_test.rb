@@ -43,9 +43,11 @@ class HashTest < Test::Unit::TestCase
     assert_equal({ "FOO" => 2, "BAR" => 4 }, { "Foo" => 1, "Bar" => 2 }.map_with_monad { |p| [p[0].upcase, p[1] * 2] })
   end
 
-  # Special case: because Hash#flatten is built into Ruby, must preserver existing behavior
-  def test_flatten_still_behaves_normaly_returning_array_of_alternating_keys_and_values
-   assert_equal ["Foo", 1, "Bar", 2], { "Foo" => 1, "Bar" => 2 }.flatten
+  # Special case: because Hash#flatten is built into Ruby, must preserve existing behavior
+  unless (RUBY_ENGINE.to_s rescue nil) == 'rbx' # Except on Rubinius, where it's broken, apparently
+    def test_flatten_still_behaves_normaly_returning_array_of_alternating_keys_and_values    
+      assert_equal ["Foo", 1, "Bar", 2], { "Foo" => 1, "Bar" => 2 }.flatten
+    end
   end
 
   def test_shallow_flatten_raises_type_error
