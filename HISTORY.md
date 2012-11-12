@@ -1,5 +1,10 @@
 # HISTORY
 
+## v0.4.0 (Nov 11, 2012)
+
+  - added scala-like extensions to Hash
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.3.0...v0.4.0
+
 ## v0.3.0 (Apr 29, 2012)
 
   - added Either#lift_to_a (and #lift)
