@@ -17,11 +17,11 @@ The goal of this library is to make the most common and useful Scala monadic idi
 * {Rumonade::Option Option}
 * {Rumonade::ArrayExtensions Array}
 * {Rumonade::Either Either}
-* Hash -- _coming_ _soon!_
+* {Rumonade::Hash Hash}
 * (_more_ _TBD_)
 
 Syntactic support for scala-like for-comprehensions[http://www.scala-lang.org/node/111] will be implemented
-as a sequence of calls to #flat_map, #select, etc, modelling Scala's
+as a sequence of calls to #flat_map, #select, etc, modeling Scala's
 approach[http://stackoverflow.com/questions/3754089/scala-for-comprehension/3754568#3754568].
 
 Support for an all_catch[http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/library/scala/util/control/Exception$.html]
@@ -90,6 +90,15 @@ Note:
     right.map { |*names| names.join(" and ") }
   # => Left(["No such person: Jill", "No such person: Joan"])
 
+---
+=== {Rumonade::Hash Hash}:
+
+  h = { "Foo" => 1, "Bar" => 2, "Baz" => 3 }
+  h = h.flat_map { |k, v| { k => v, k.upcase => v * 10 } }
+  # => {"Foo"=>1, "FOO"=>10, "Bar"=>2, "BAR"=>20, "Baz"=>3, "BAZ"=>30}
+  h.select { |k, v| k =~ /^b/i }
+  # => {"Bar"=>2, "BAR"=>20, "Baz"=>3, "BAZ"=>30}
+
 (_more_ _examples_ _coming_ _soon_...)
 
 == Approach
@@ -113,7 +122,7 @@ The priorities for Rumonade are:
 
 == Status
 
-Option, Either, and Array are already usable.
+Option, Either, Array, and Hash are already usable.
 
 <b><em>Supported Ruby versions</em></b>: MRI 1.9.2, MRI 1.9.3, JRuby in 1.9 mode, and Rubinius in 1.9 mode.
 
