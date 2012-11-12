@@ -96,8 +96,12 @@ Note:
   h = { "Foo" => 1, "Bar" => 2, "Baz" => 3 }
   h = h.flat_map { |k, v| { k => v, k.upcase => v * 10 } }
   # => {"Foo"=>1, "FOO"=>10, "Bar"=>2, "BAR"=>20, "Baz"=>3, "BAZ"=>30}
-  h.select { |k, v| k =~ /^b/i }
+  h = h.select { |k, v| k =~ /^b/i }
   # => {"Bar"=>2, "BAR"=>20, "Baz"=>3, "BAZ"=>30}
+  h.get("Bar")
+  # => Some(2)
+  h.get("Foo")
+  # => None
 
 (_more_ _examples_ _coming_ _soon_...)
 
