@@ -15,8 +15,11 @@ module Rumonade
     end
 
     module InstanceMethods
+      # Preserve native +map+ and +flatten+ methods for compatibility
+      METHODS_TO_REPLACE_WITH_MONAD = Monad::DEFAULT_METHODS_TO_REPLACE_WITH_MONAD - [:map, :flatten]
+
       def bind(lam = nil, &blk)
-        inject(self.class.empty) { |hsh, elt| hsh.merge((lam || blk).call(elt).to_hash) }
+        inject(self.class.empty) { |hsh, elt| hsh.merge((lam || blk).call(elt)) }
       end
     end
   end

@@ -14,6 +14,9 @@ module Rumonade
     end
 
     module InstanceMethods
+      # Preserve native +map+ method for performance
+      METHODS_TO_REPLACE_WITH_MONAD = Monad::DEFAULT_METHODS_TO_REPLACE_WITH_MONAD - [:map]
+
       def bind(lam = nil, &blk)
         inject(self.class.empty) { |arr, elt| arr + (lam || blk).call(elt).to_a }
       end

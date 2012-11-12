@@ -8,17 +8,18 @@ module Rumonade
   #   and replaced with the method defined here which has the suffix +_with_monad+
   #
   module Monad
-    # Names of methods to replace when mixed into a class
-    METHODS_TO_REPLACE = [:flat_map, :flatten]
+    # Methods to replace when mixed in -- unless class defines +METHODS_TO_REPLACE_WITH_MONAD+
+    DEFAULT_METHODS_TO_REPLACE_WITH_MONAD = [:map, :flat_map, :flatten]
 
     # When mixed into a class, this callback is executed
     def self.included(base)
+      methods_to_replace = base::METHODS_TO_REPLACE_WITH_MONAD rescue DEFAULT_METHODS_TO_REPLACE_WITH_MONAD
+
       base.class_eval do
         # optimization: replace flat_map with an alias for bind, as they are identical
         alias_method :flat_map_with_monad, :bind
 
-        # force only a few methods to be aliased to monad versions; others can stay with native or Enumerable versions
-        METHODS_TO_REPLACE.each do |method_name|
+        methods_to_replace.each do |method_name|
           alias_method "#{method_name}_without_monad".to_sym, method_name if public_instance_methods.include? method_name
           alias_method method_name, "#{method_name}_with_monad".to_sym
         end
@@ -33,20 +34,22 @@ module Rumonade
     end
 
     # Returns a monad whose elements are the results of applying the given function to each element in this monad
-    def map(lam = nil, &blk)
+    #
+    # NOTE: normally aliased as +map+ when +Monad+ is mixed into a class
+    def map_with_monad(lam = nil, &blk)
       bind { |v| self.class.unit((lam || blk).call(v)) }
     end
 
     # Returns the results of applying the given function to each element in this monad
     #
-    # NOTE: aliased as +flat_map+ when +Monad+ is mixed into a class
+    # NOTE: normally aliased as +flat_map+ when +Monad+ is mixed into a class
     def flat_map_with_monad(lam = nil, &blk)
       bind(lam || blk)
     end
 
     # Returns a monad whose elements are the ultimate (non-monadic) values contained in all nested monads
     #
-    # NOTE: aliased as +flatten+ when +Monad+ is mixed into a class
+    # NOTE: normally aliased as +flatten+ when +Monad+ is mixed into a class
     #
     # @example
     #   [Some(Some(1)), Some(Some(None))], [None]].flatten
