@@ -53,4 +53,9 @@ class HashTest < Test::Unit::TestCase
   def test_shallow_flatten_raises_type_error
     assert_raise(TypeError) { { "Foo" => "Bar" }.shallow_flatten }
   end
+
+  def test_get_returns_option_of_value
+    assert_equal None, { "Foo" => 1, "Bar" => 2 }.get("Baz")
+    assert_equal Some(1), { "Foo" => 1, "Bar" => 2 }.get("Foo")
+  end
 end

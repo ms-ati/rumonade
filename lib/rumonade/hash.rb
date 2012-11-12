@@ -21,6 +21,11 @@ module Rumonade
       def bind(lam = nil, &blk)
         inject(self.class.empty) { |hsh, elt| hsh.merge((lam || blk).call(elt)) }
       end
+
+      # @return [Option] a Some containing the value associated with +key+, or None if not present
+      def get(key)
+        Option(self[key])
+      end
     end
   end
 end
