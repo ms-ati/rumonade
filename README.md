@@ -95,6 +95,10 @@ find_person("Joan").lift_to_a
 # => Left(["No such person: Jill", "No such person: Joan"])
 ```
 
+Also, see the `Either` class in action in the [Ruby version](https://gist.github.com/2553490) 
+of [A Tale of Three Nightclubs](http://bugsquash.blogspot.com/2012/03/example-of-applicative-validation-in.html)
+validation example in F#, and compare it to the [Scala version using scalaz](https://gist.github.com/970717).
+
 ---
 ### Hash: `flat_map` returns a Hash for each key/value pair; `get` returns an Option
 
@@ -127,10 +131,10 @@ Rumonade wants to be a practical drop-in Monad solution that will fit well into 
 The priorities for Rumonade are:
 
 1.  Practical usability in day-to-day Ruby
-    *  <b>don't</b> mess up normal idioms of the language (e.g., Hash#map)
-    *  <b>don't</b> slow down normal idioms of the language (e.g., Array#map)
+    *  <b>don't</b> mess up normal idioms of the language (e.g., `Hash#map`)
+    *  <b>don't</b> slow down normal idioms of the language (e.g., `Array#map`)
 2.  Rubyish-ness of usage
-    *  Monad is a mix-in, requiring methods +self.unit+ and +#bind+ be implemented by target classes
+    *  Monad is a mix-in, requiring methods `self.unit` and `#bind` be implemented by target class
     *  Prefer blocks to lambda/Procs where possible, but allow both
 3.  Equivalent idioms to Scala where possible
 
