@@ -1,6 +1,7 @@
-![Travis Build Status](https://secure.travis-ci.org/ms-ati/rumonade.png?branch=master)
-
 # [Rumonade](https://rubygems.org/gems/rumonade)
+
+[![Build Status](https://travis-ci.org/ms-ati/rumonade.png)](https://travis-ci.org/ms-ati/rumonade)
+[![Dependency Status](https://gemnasium.com/ms-ati/rumonade.png)](https://gemnasium.com/ms-ati/rumonade)
 
 *_Project_*: [github](http://github.com/ms-ati/rumonade)
 
