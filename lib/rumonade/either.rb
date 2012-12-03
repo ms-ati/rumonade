@@ -319,4 +319,7 @@ module Rumonade
       end
     end
   end
+
+  module_function :Left, :Right
+  public :Left, :Right
 end
