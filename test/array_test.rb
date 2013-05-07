@@ -24,6 +24,7 @@ class ArrayTest < Test::Unit::TestCase
 
   def test_flat_map_behaves_correctly
     assert_equal ["FOO", "BAR"], ["foo", "bar"].flat_map { |s| [s.upcase] }
+    assert_equal [2, 4, 6], [1, 2, 3].flat_map { |i| i * 2 }
   end
 
   def test_map_behaves_correctly
