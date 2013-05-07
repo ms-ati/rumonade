@@ -55,8 +55,12 @@ module Rumonade
     #   [Some(Some(1)), Some(Some(None))], [None]].flatten
     #   #=> [1]
     #
-    def flatten_with_monad
-      bind { |x| x.is_a?(Monad) ? x.flatten_with_monad : self.class.unit(x) }
+    def flatten_with_monad(depth=nil)
+      if depth.is_a? Integer
+        depth.times.inject(self) {|e, _| e.shallow_flatten }
+      else
+        bind { |x| x.is_a?(Monad) ? x.flatten_with_monad : self.class.unit(x) }
+      end
     end
 
     # Returns a monad whose elements are all those elements of this monad for which the given predicate returned true
@@ -71,11 +75,9 @@ module Rumonade
     # with the native Ruby flatten calls (multiple-level flattening).
     #
     # @example
-    #   [Some(Some(1)), Some(Some(None))], [None]].shallow_flatten
-    #   #=> [Some(Some(1)), Some(Some(None)), None]
-    #   [Some(Some(1)), Some(Some(None)), None].shallow_flatten
-    #   #=> [Some(1), Some(None)]
-    #   [Some(1), Some(None)].shallow_flatten
+    #   [Some(Some(1)), Some(Some(None)), [None]].shallow_flatten
+    #   #=> [Some(1), Some(None), None]
+    #   [Some(1), Some(None), None].shallow_flatten
     #   #=> [1, None]
     #   [1, None].shallow_flatten
     #   #=> [1]
