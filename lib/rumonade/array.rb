@@ -18,10 +18,7 @@ module Rumonade
       METHODS_TO_REPLACE_WITH_MONAD = Monad::DEFAULT_METHODS_TO_REPLACE_WITH_MONAD - [:map]
 
       def bind(lam = nil, &blk)
-        inject(self.class.empty) do |arr, elt|
-          res = (lam || blk).call(elt)
-          arr + (res.respond_to?(:to_a) ? res.to_a : [res])
-        end
+        inject(self.class.empty) { |arr, elt| arr + (lam || blk).call(elt).to_a }
       end
     end
   end
