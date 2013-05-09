@@ -1,5 +1,10 @@
 # HISTORY
 
+## v0.4.2 (May 9, 2013)
+
+  - revert change which confused Array#map with Array#flat_map
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.4.1...v0.4.2
+
 ## v0.4.1 (May 9, 2013)
 
   - fixed behavior of #flatten called with optional depth parameter
