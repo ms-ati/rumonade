@@ -1,5 +1,11 @@
 # HISTORY
 
+## v0.4.1 (May 9, 2013)
+
+  - fixed behavior of #flatten called with optional depth parameter
+      - thanks Martin Mauch (@nightscape)!
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.4.0...v0.4.1
+
 ## v0.4.0 (Nov 11, 2012)
 
   - added scala-like extensions to Hash
