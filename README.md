@@ -1,5 +1,6 @@
 # [Rumonade](https://rubygems.org/gems/rumonade)
 
+[![Gem Version](https://badge.fury.io/rb/rumonade.png)](http://badge.fury.io/rb/rumonade)
 [![Build Status](https://travis-ci.org/ms-ati/rumonade.png)](https://travis-ci.org/ms-ati/rumonade)
 [![Dependency Status](https://gemnasium.com/ms-ati/rumonade.png)](https://gemnasium.com/ms-ati/rumonade)
 [![Code Climate](https://codeclimate.com/github/ms-ati/rumonade.png)](https://codeclimate.com/github/ms-ati/rumonade)
