@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/ms-ati/rumonade.png)](https://travis-ci.org/ms-ati/rumonade)
 [![Dependency Status](https://gemnasium.com/ms-ati/rumonade.png)](https://gemnasium.com/ms-ati/rumonade)
 [![Code Climate](https://codeclimate.com/github/ms-ati/rumonade.png)](https://codeclimate.com/github/ms-ati/rumonade)
+[![Coverage Status](https://coveralls.io/repos/ms-ati/rumonade/badge.png)](https://coveralls.io/r/ms-ati/rumonade)
 
 *_Project_*: [github](http://github.com/ms-ati/rumonade)
 
