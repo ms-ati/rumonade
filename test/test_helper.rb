@@ -1,8 +1,17 @@
 $:.unshift(File.dirname(File.dirname(File.expand_path(__FILE__))) + '/lib')
 require "rubygems"
 require "test/unit"
+
+# Setup code coverage via SimpleCov and post to Coveralls.io
+require "simplecov"
 require "coveralls"
-Coveralls.wear!
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start do
+  add_filter "/test/"
+end
 
 require "rumonade"
 
