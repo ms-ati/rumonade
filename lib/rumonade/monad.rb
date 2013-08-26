@@ -59,7 +59,13 @@ module Rumonade
       if depth.is_a? Integer
         depth.times.inject(self) {|e, _| e.shallow_flatten }
       else
-        bind { |x| x.is_a?(Monad) ? x.flatten_with_monad : self.class.unit(x) }
+        bind do |x|
+          if x.is_a?(Monad) && !x.is_a?(Hash)
+            x.flatten_with_monad
+          else
+            self.class.unit(x)
+          end
+        end
       end
     end
 
