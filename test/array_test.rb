@@ -55,4 +55,9 @@ class ArrayTest < Test::Unit::TestCase
     assert_equal [1, None], [Some(Some(1)), Some(Some(None)), [None]].flatten(2)
     assert_equal [1], [Some(Some(1)), Some(Some(None)), [None]].flatten(3)
   end
+
+  def test_flatten_does_not_break_default_ruby_behaviour
+    arr = [ { 'thou' => 'shalt', 'not touch' => 'hashes' }, ', seriously!' ]
+    assert_equal arr, arr.flatten
+  end
 end
