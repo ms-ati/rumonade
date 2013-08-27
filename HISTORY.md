@@ -1,5 +1,10 @@
 # HISTORY
 
+## v0.4.3 (Aug 27, 2013)
+
+  - Fix: prevent Array#flatten from attempting to flatten Hash (thanks @moser!)
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.4.2...v0.4.3
+
 ## v0.4.2 (May 9, 2013)
 
   - revert change which confused Array#map with Array#flat_map
