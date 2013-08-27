@@ -57,7 +57,7 @@ module Rumonade
     #
     def flatten_with_monad(depth=nil)
       if depth.is_a? Integer
-        depth.times.inject(self) {|e, _| e.shallow_flatten }
+        depth.times.inject(self) { |e, _| e.shallow_flatten }
       else
         bind do |x|
           if x.is_a?(Monad) && x.can_flatten_in_monad?
@@ -92,8 +92,10 @@ module Rumonade
       bind { |x| x.is_a?(Monad) ? x : self.class.unit(x) }
     end
 
-    # True if flatten should use flatten_with_monad on members (eg. elements of an array)
-    # Is overwritten in Hash.
+    # Returns +true+ if #flatten_with_monad can call recursively on contained
+    # values members (eg. elements of an array).
+    #
+    # NOTE: Is overridden in Hash.
     def can_flatten_in_monad?
       true
     end
