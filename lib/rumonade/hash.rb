@@ -27,9 +27,16 @@ module Rumonade
         Option(self[key])
       end
     end
+
+    module InstanceOverrides
+      def can_flatten_in_monad?
+        false
+      end
+    end
   end
 end
 
 Hash.send(:extend, Rumonade::HashExtensions::ClassMethods)
 Hash.send(:include, Rumonade::HashExtensions::InstanceMethods)
 Hash.send(:include, Rumonade::Monad)
+Hash.send(:include, Rumonade::HashExtensions::InstanceOverrides)
