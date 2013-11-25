@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/ms-ati/rumonade"
   s.summary     = "A Scala-inspired Monad library for Ruby"
   s.description = "A Scala-inspired Monad library for Ruby, aiming to share the most common idioms for folks working in both languages. Includes Option, Array, etc."
+  s.license     = "MIT"
 
   s.rubyforge_project = "rumonade"
 
