@@ -5,6 +5,7 @@
 [![Dependency Status](https://gemnasium.com/ms-ati/rumonade.png)](https://gemnasium.com/ms-ati/rumonade)
 [![Code Climate](https://codeclimate.com/github/ms-ati/rumonade.png)](https://codeclimate.com/github/ms-ati/rumonade)
 [![Coverage Status](https://coveralls.io/repos/ms-ati/rumonade/badge.png)](https://coveralls.io/r/ms-ati/rumonade)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ms-ati/rumonade/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 *_Project_*: [github](http://github.com/ms-ati/rumonade)
 
@@ -149,7 +150,3 @@ Option, Either, Array, and Hash are already usable.
 <b><em>Supported Ruby versions</em></b>: MRI 2.0.0, 1.9.3, 1.9.2, JRuby in 1.9 mode, and Rubinius in 1.9 mode.
 
 Please try it out, and let me know what you think! Suggestions are always welcome.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ms-ati/rumonade/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
