@@ -149,3 +149,7 @@ Option, Either, Array, and Hash are already usable.
 <b><em>Supported Ruby versions</em></b>: MRI 2.0.0, 1.9.3, 1.9.2, JRuby in 1.9 mode, and Rubinius in 1.9 mode.
 
 Please try it out, and let me know what you think! Suggestions are always welcome.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ms-ati/rumonade/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
