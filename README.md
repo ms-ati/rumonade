@@ -1,3 +1,15 @@
+# NOTICE: Re-thinking is happening...
+
+Scala has evolved quite a bit since this project began in 2011, and mainstream Ruby usage
+has evolved as well.
+
+In the branch [experimental-0.5](https://github.com/ms-ati/rumonade/tree/experimental-0.5),
+new things are going to be tried.
+
+If you're interested in sharing your ideas, join the [mailing list](http://groups.google.com/group/rumonade).
+
+---------------------------------------
+
 # [Rumonade](https://rubygems.org/gems/rumonade)
 
 [![Gem Version](https://badge.fury.io/rb/rumonade.png)](http://badge.fury.io/rb/rumonade)
