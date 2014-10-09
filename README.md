@@ -17,7 +17,7 @@ If you're interested in sharing your ideas, join the [mailing list](http://group
 [![Dependency Status](https://gemnasium.com/ms-ati/rumonade.png)](https://gemnasium.com/ms-ati/rumonade)
 [![Code Climate](https://codeclimate.com/github/ms-ati/rumonade.png)](https://codeclimate.com/github/ms-ati/rumonade)
 [![Coverage Status](https://coveralls.io/repos/ms-ati/rumonade/badge.png)](https://coveralls.io/r/ms-ati/rumonade)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ms-ati/rumonade/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 
 *_Project_*: [github](http://github.com/ms-ati/rumonade)
 
