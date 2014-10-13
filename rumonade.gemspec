@@ -12,8 +12,6 @@ Gem::Specification.new do |s|
   s.description = "A Scala-inspired Monad library for Ruby, aiming to share the most common idioms for folks working in both languages. Includes Option, Array, etc."
   s.license     = "MIT"
 
-  s.rubyforge_project = "rumonade"
-
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
