@@ -14,3 +14,6 @@ Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/*_test.rb'
 end
+
+# Configure `rake clobber` to delete all generated files
+CLOBBER.include('pkg', 'doc', 'coverage')
