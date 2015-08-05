@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+article_one:
+  user: user_one
+
+article_two:
+  user: user_one
