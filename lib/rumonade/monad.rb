@@ -52,7 +52,7 @@ module Rumonade
     # NOTE: normally aliased as +flatten+ when +Monad+ is mixed into a class
     #
     # @example
-    #   [Some(Some(1)), Some(Some(None))], [None]].flatten
+    #   [Some(Some(1)), Some(Some(None))], [None]].flatten_with_monad
     #   #=> [1]
     #
     def flatten_with_monad(depth=nil)

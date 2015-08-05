@@ -41,24 +41,24 @@ class ArrayTest < Test::Unit::TestCase
   end
 
   def test_flatten_behaves_correctly
-    assert_equal [0, 1, 2, 3, 4], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten
-    assert_equal [1, 2], [None, Some(1), Some(Some(2))].flatten
-    assert_equal [], [Some(Some(Some(None)))].flatten
+    assert_equal [0, 1, 2, 3, 4], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten_with_monad
+    assert_equal [1, 2], [None, Some(1), Some(Some(2))].flatten_with_monad
+    assert_equal [], [Some(Some(Some(None)))].flatten_with_monad
   end
 
   def test_flatten_with_argument_behaves_correctly
-    assert_equal [0, 1, [2], [[3]], [[[4]]]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten(1)
-    assert_equal [0, 1, 2, [3], [[4]]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten(2)
-    assert_equal [0, 1, 2, 3, [4]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten(3)
-    assert_equal [0, 1, 2, 3, 4], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten(4)
-    assert_equal [Some(Some(1)), Some(Some(None)), [None]], [Some(Some(1)), Some(Some(None)), [None]].flatten(0)
-    assert_equal [Some(1), Some(None), None], [Some(Some(1)), Some(Some(None)), [None]].flatten(1)
-    assert_equal [1, None], [Some(Some(1)), Some(Some(None)), [None]].flatten(2)
-    assert_equal [1], [Some(Some(1)), Some(Some(None)), [None]].flatten(3)
+    assert_equal [0, 1, [2], [[3]], [[[4]]]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten_with_monad(1)
+    assert_equal [0, 1, 2, [3], [[4]]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten_with_monad(2)
+    assert_equal [0, 1, 2, 3, [4]], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten_with_monad(3)
+    assert_equal [0, 1, 2, 3, 4], [0, [1], [[2]], [[[3]]], [[[[4]]]]].flatten_with_monad(4)
+    assert_equal [Some(Some(1)), Some(Some(None)), [None]], [Some(Some(1)), Some(Some(None)), [None]].flatten_with_monad(0)
+    assert_equal [Some(1), Some(None), None], [Some(Some(1)), Some(Some(None)), [None]].flatten_with_monad(1)
+    assert_equal [1, None], [Some(Some(1)), Some(Some(None)), [None]].flatten_with_monad(2)
+    assert_equal [1], [Some(Some(1)), Some(Some(None)), [None]].flatten_with_monad(3)
   end
 
   def test_flatten_does_not_break_default_ruby_behaviour_with_nested_hash
     arr = [ { 'thou' => 'shalt', 'not touch' => 'hashes' }, ', seriously!' ]
-    assert_equal arr, arr.flatten
+    assert_equal arr, arr.flatten_with_monad
   end
 end
