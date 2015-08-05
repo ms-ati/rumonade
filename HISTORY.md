@@ -1,5 +1,10 @@
 # HISTORY
 
+## v0.4.4 (Aug 5, 2015)
+
+  - Fix: don't replace Array#flatten, as it breaks Rails 3 (see #8)
+  - See full list @ https://github.com/ms-ati/rumonade/compare/v0.4.3...v0.4.4
+
 ## v0.4.3 (Aug 27, 2013)
 
   - Fix: prevent Array#flatten from attempting to flatten Hash (thanks @moser!)
