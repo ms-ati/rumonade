@@ -8,7 +8,9 @@ gem 'rails', '3.2.22'
 gem 'sqlite3'
 
 ## Reproduce issue #8
-gem 'rumonade'
+#gem 'rumonade'
+## Workaround issue #8 for using Option only
+gem 'rumonade', :require => 'rumonade/option'
 
 # Gems used only for assets and not required
 # in production environments by default.
