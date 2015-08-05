@@ -1,0 +1,4 @@
+# Don't build this branch in CI, see http://docs.travis-ci.com/user/customizing-the-build/#Building-Specific-Branches
+branches:
+  except:
+    - issue-8-reproduce
