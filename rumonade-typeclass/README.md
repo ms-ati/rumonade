@@ -1,1 +1,1 @@
-# rumonade-typeclass
+# TypeClass

@@ -1,10 +1,10 @@
 # encoding: utf-8
 $:.unshift File.expand_path('../lib', __FILE__)
-require 'rumonade/typeclass/version'
+require 'rumonade/type_class/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'rumonade-typeclass'
-  s.version       = Rumonade::Typeclass::VERSION
+  s.name          = 'rumonade-type_class'
+  s.version       = Rumonade::TypeClass::VERSION
   s.platform      = Gem::Platform::RUBY
   s.license       = 'MIT'
   s.authors       = ['Marc Siegel']
