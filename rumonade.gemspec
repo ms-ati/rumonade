@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coveralls'
   s.add_development_dependency 'rake',  '~> 10.3.0'
   s.add_development_dependency 'rspec', '~> 3.1.0'
+  s.add_development_dependency 'gem-release'
 end
